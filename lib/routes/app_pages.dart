@@ -1,0 +1,20 @@
+import 'package:eco_cycle/routes/app_routes.dart';
+import 'package:eco_cycle/screens/on_boarding/on_boarding_view.dart';
+import 'package:eco_cycle/screens/splash/splash_binding.dart';
+import 'package:eco_cycle/screens/splash/splash_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class AppPages {
+  AppPages._();
+  static const INITIAL = Routes.SPLASH;
+
+  static final routes = <GetPage>[
+    GetPage(
+      name: Routes.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
+    ),
+    GetPage(name: Routes.ONBOARDING, page: () => OnBoardingView()),
+  ];
+}
