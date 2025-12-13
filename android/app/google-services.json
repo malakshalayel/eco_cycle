@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "368339982928",
+    "project_id": "eco-cycle-f777d",
+    "storage_bucket": "eco-cycle-f777d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368339982928:android:a99c4cabc350ea81f24f55",
+        "android_client_info": {
+          "package_name": "com.example.eco_cycle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Wyuq8IN9Zn_e9pOrU_Wd8iAbprcoXFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
