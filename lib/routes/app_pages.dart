@@ -1,4 +1,6 @@
 import 'package:eco_cycle/routes/app_routes.dart';
+import 'package:eco_cycle/screens/home/home_bindings.dart';
+import 'package:eco_cycle/screens/home/home_view.dart';
 import 'package:eco_cycle/screens/login/login_bindings.dart';
 import 'package:eco_cycle/screens/login/login_view.dart';
 import 'package:eco_cycle/screens/on_boarding/on_boarding_bindings.dart';
@@ -19,7 +21,8 @@ class AppPages {
       binding: SplashBinding(),
     ),
     GetPage(name: Routes.ONBOARDING, page: () => const OnboardingView() , binding: OnBoardingBindings(),),
-    GetPage(name: Routes.LOGIN ,page: () => const LoginView(), binding: LoginBindings(), )
-    
+    GetPage(name: Routes.LOGIN ,page: () => const LoginView(), binding: LoginBindings(), ),
+    GetPage(name: Routes.HOME ,page: () => const HomeView(), binding: HomeBindings(), )
+
   ];
 }
