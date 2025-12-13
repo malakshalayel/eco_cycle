@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:368339982928:android:a99c4cabc350ea81f24f55",
+        "mobilesdk_app_id": "1:368339982928:android:614b3d38c3da922ef24f55",
         "android_client_info": {
-          "package_name": "com.example.eco_cycle"
+          "package_name": "com.ecocycle.app"
         }
       },
       "oauth_client": [],

@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -60,9 +57,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD3Wyuq8IN9Zn_e9pOrU_Wd8iAbprcoXFM',
-    appId: '1:368339982928:android:a99c4cabc350ea81f24f55',
+    appId: '1:368339982928:android:614b3d38c3da922ef24f55',
     messagingSenderId: '368339982928',
     projectId: 'eco-cycle-f777d',
     storageBucket: 'eco-cycle-f777d.firebasestorage.app',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBvXoKgXFH6IkbkBxufv92uitB-rISVh5g',
+    appId: '1:368339982928:ios:4d82a19a7af053eff24f55',
+    messagingSenderId: '368339982928',
+    projectId: 'eco-cycle-f777d',
+    storageBucket: 'eco-cycle-f777d.firebasestorage.app',
+    iosBundleId: 'com.example.ecoCycle',
+  );
+
 }
