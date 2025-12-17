@@ -1,8 +1,11 @@
+import 'package:eco_cycle/firebase_options.dart';
 import 'package:eco_cycle/localization/app_translations.dart';
 import 'package:eco_cycle/routes/app_pages.dart';
+import 'package:eco_cycle/services/auth_services.dart';
 import 'package:eco_cycle/services/language_services.dart';
 import 'package:eco_cycle/services/theme_services.dart';
 import 'package:eco_cycle/styles/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +15,11 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+ await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+      Get.put<AuthService>(AuthService(), permanent: true);
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

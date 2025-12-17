@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "368339982928",
+    "project_id": "eco-cycle-f777d",
+    "storage_bucket": "eco-cycle-f777d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368339982928:android:614b3d38c3da922ef24f55",
+        "android_client_info": {
+          "package_name": "com.ecocycle.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368339982928-o0t6qer70ap1du6gold19hftf7odqm5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecocycle.app",
+            "certificate_hash": "91a504fff6b2ea2589c5aee6d12bcaab17baa7f7"
+          }
+        },
+        {
+          "client_id": "368339982928-cvfnhb71ueo43vfk3tgoaiqhkobnv0p0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Wyuq8IN9Zn_e9pOrU_Wd8iAbprcoXFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368339982928-cvfnhb71ueo43vfk3tgoaiqhkobnv0p0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "368339982928-ef79g2m9pjpi4sgvojot1odv30sjkkoh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ecoCycle"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

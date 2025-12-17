@@ -2,9 +2,11 @@ import 'package:eco_cycle/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingController extends GetxController {
   final PageController pageController = PageController();
+  final GetStorage _storage = GetStorage();
 
   int currentIndex = 0;
   void onPageChanged(int index) {
@@ -19,11 +21,14 @@ class OnBoardingController extends GetxController {
         curve: Curves.easeInOut,
       );
     } else {
-      Get.offAllNamed(Routes.HOME);
+      _storage.write('seenOnboarding', true);
+
+      Get.offAllNamed(Routes.LOGIN);
     }
   }
 
   void skip() {
-    Get.offAllNamed(Routes.HOME);
+_storage.write('seenOnboarding', true);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }
