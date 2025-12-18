@@ -11,29 +11,39 @@ class SubmitButtonWidget extends GetView<SubmissionController> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
+       
         height: 55.h,
         child: ElevatedButton(
           onPressed: controller.canSubmit ? controller.submit : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
-            disabledBackgroundColor: const Color(0xFFD9D9D9), // رمادي مثل الصورة
+            disabledBackgroundColor: const Color(0xFFD9D9D9),
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), 
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          child: Text(
-            'Submit for Review',
-            style: TextStyle(
-              color: controller.canSubmit
-                  ? Colors.white
-                  : Colors.white.withOpacity(0.7), // مثل الصورة
-              fontWeight: FontWeight.w500,
-              fontSize: 14.sp
-            ),
-          ),
+          child: controller.isLoading
+              ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
+                )
+              : Text(
+                  'Submit for Review',
+                  style: TextStyle(
+                    color: controller.canSubmit
+                        ? Colors.white
+                        : Colors.white.withOpacity(0.7),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
         ),
       ),
     );
   }
 }
+
