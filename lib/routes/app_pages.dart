@@ -14,8 +14,7 @@ import 'package:get/get.dart';
 
 class AppPages {
   AppPages._();
-  static const INITIAL = Routes.SPLASH;
-
+  static const INITIAL = Routes.SUBMISSION;
 
   static final routes = <GetPage>[
     GetPage(
@@ -33,8 +32,15 @@ class AppPages {
       page: () => SubmissionView(),
       binding: SubmissionBinding(),
     ),
-    GetPage(name: Routes.ONBOARDING, page: () => const OnboardingView() , binding: OnBoardingBindings(),),
-    GetPage(name: Routes.LOGIN ,page: () => const LoginView(), binding: LoginBindings(), ),
-
+    GetPage(
+      name: Routes.ONBOARDING,
+      page: () => const OnboardingView(),
+      binding: OnBoardingBindings(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => const LoginView(),
+      binding: LoginBindings(),
+    ),
   ];
 }
