@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 
 class AppPages {
   AppPages._();
-  static const INITIAL = Routes.SUBMISSION;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = <GetPage>[
     GetPage(
