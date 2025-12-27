@@ -24,7 +24,7 @@ class SubmissionView extends GetView<SubmissionController> {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Get.back(),
+           onPressed: (){},
           ),
           title: const Text(
             'Submit Recyclable',
