@@ -46,7 +46,7 @@ class LoginView extends GetView<LoginController> {
 
               SizedBox(height: 40.h),
               Text("Join EcoCycle today!", style: AppTextStyles.h2),
-              SizedBox(height: 120.h),
+              SizedBox(height: 90.h),
 
               GetBuilder<LoginController>(
                 builder:(c)=> Padding(

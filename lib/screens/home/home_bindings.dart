@@ -1,8 +1,9 @@
-import 'package:eco_cycle/screens/home/home_controller.dart';
 import 'package:get/get.dart';
+import 'home_controller.dart';
 
-class HomeBindings extends Bindings {
+class HomeBinding extends Bindings {
   @override
-  void dependencies() { 
-    Get.lazyPut(() => HomeController()); 
-  }}
+  void dependencies() {
+    Get.put<HomeController>(HomeController());
+  }
+}
