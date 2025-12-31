@@ -36,7 +36,7 @@ class LocationWidget extends GetView<SubmissionController> {
 
             // Input
             Container(
-              // margin: EdgeInsets.only(bottom: 10.h),
+              
               height: 38.h,
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               decoration: BoxDecoration(
