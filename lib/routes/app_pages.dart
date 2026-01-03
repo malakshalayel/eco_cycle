@@ -21,7 +21,7 @@ import 'package:get/get.dart';
 
 class AppPages {
   AppPages._();
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = <GetPage>[
     GetPage(
@@ -45,11 +45,11 @@ class AppPages {
       page: () => const LoginView(),
       binding: LoginBindings(),
     ),
-    // GetPage(
-    //   name: Routes.HOME,
-    //   page: () => const NavigationView(),
-    //   binding: NavigationBinding(),
-    // ),
+    GetPage(
+      name: Routes.NAVIGATION,
+      page: () => const NavigationView(),
+      binding: NavigationBinding(),
+    ),
     GetPage(
       name: Routes.SUBMISSION_HISTORY,
       page: () => const HistoryView(),

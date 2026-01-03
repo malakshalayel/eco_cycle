@@ -13,6 +13,8 @@ class PointsView extends GetView<PointsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: Text(
@@ -20,7 +22,7 @@ class PointsView extends GetView<PointsController> {
           style: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
-                leading: Icon(Icons.arrow_back, size: 22.sp,color: Colors.white),
+               // leading: Icon(Icons.arrow_back, size: 22.sp,color: Colors.white),
 
       ),
       body: SingleChildScrollView(

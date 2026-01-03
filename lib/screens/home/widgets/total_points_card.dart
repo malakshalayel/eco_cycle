@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../constants/app_colors.dart';
 
 class TotalPointsCard extends StatelessWidget {
-  const TotalPointsCard({super.key});
+  final int totalPoints;
+  final int weeklyPoints;
+
+  const TotalPointsCard({
+    super.key,
+    required this.totalPoints,
+    required this.weeklyPoints,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: colors.primary, // Header background
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(12.r),
           bottomRight: Radius.circular(12.r),
@@ -17,35 +26,42 @@ class TotalPointsCard extends StatelessWidget {
       ),
       padding: EdgeInsets.all(16.w),
       child: Container(
-        padding: EdgeInsets.all(12.w),
+        padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.cardColor, // adapts to light/dark
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /// Title
                 Text(
                   'Total Points',
-                  style: TextStyle(
-                    fontSize: 14.sp,
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+
                 SizedBox(height: 6.h),
+
+                /// Points Value
                 Text(
-                   '2,450',
-                  style: TextStyle(
-                    fontSize: 24.sp,
+                  totalPoints.toString(),
+                  style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
+                    color: colors.primary,
                   ),
                 ),
+
                 SizedBox(height: 10.h),
-                Text('+180 points this week', style: TextStyle(fontSize: 14.sp)),
+
+                /// Weekly Gain
+                Text(
+                  '+$weeklyPoints points this week',
+                  style: theme.textTheme.bodySmall,
+                ),
               ],
             ),
           ],

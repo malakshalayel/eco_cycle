@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../points_controller.dart';
-import '../../../constants/app_colors.dart';
 
 class PointsBalanceCard extends GetView<PointsController> {
   const PointsBalanceCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: colorScheme.primary, // لون الهوم
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(12.r),
           bottomRight: Radius.circular(12.r),
@@ -19,35 +21,42 @@ class PointsBalanceCard extends GetView<PointsController> {
       ),
       padding: EdgeInsets.all(16.w),
       child: Container(
-        padding: EdgeInsets.all(12.w),
+        padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /// Title
                 Text(
-                  'available Points',
-                  style: TextStyle(
-                    fontSize: 14.sp,
+                  'Available Points',
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+
                 SizedBox(height: 6.h),
+
+                /// Points Value
                 Text(
-                  controller.totalPoints.toString(),
-                  style: TextStyle(
-                    fontSize: 24.sp,
+                  controller.pointsBalance.toString(),
+                  style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
+                    color: colorScheme.primary,
                   ),
                 ),
-                SizedBox(height: 10.h),
-                Text('≈ \$24.50 value', style: TextStyle(fontSize: 14.sp)),
+
+                SizedBox(height: 8.h),
+
+                /// Cash Value
+                Text(
+                  '≈ \$${controller.cashValue.toStringAsFixed(2)} value',
+                  style: theme.textTheme.bodySmall,
+                ),
               ],
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:eco_cycle/screens/home/widgets/home_top_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,15 +15,14 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HomeHeaderWidget(),
-           
-            const TotalPointsCard(),
-            SizedBox(height: 16.h),
-            const QuickActionsSection(),
+            HomeTopSection(),
+
+             SizedBox(height: 16.h),
+             const QuickActionsSection(),
             SizedBox(height: 16.h),
             const RecentActivityCard(),
             SizedBox(height: 24.h),

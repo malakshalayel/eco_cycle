@@ -1,6 +1,8 @@
+import 'package:eco_cycle/services/theme_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../constants/app_colors.dart';
 import 'profile_controller.dart';
 
@@ -10,7 +12,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
@@ -23,10 +25,10 @@ class ProfileView extends GetView<ProfileController> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: (){},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+        //   onPressed: (){},
+        // ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -54,6 +56,13 @@ class ProfileView extends GetView<ProfileController> {
             _InfoCard(icon: Icons.email, text: controller.email),
 
             SizedBox(height: 20.h),
+             _InfoCard(
+  onTap: () => ThemeServices().switchTheme(),
+  icon: Get.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+  text: Get.isDarkMode ? 'Light Mode' : 'Dark Mode',
+),
+            SizedBox(height: 20.h),
+
 
             /// Logout
             _ActionCard(
@@ -131,31 +140,34 @@ class _ActionCard extends StatelessWidget {
 class _InfoCard extends StatelessWidget {
   final IconData icon;
   final String text;
-
-  const _InfoCard({required this.icon, required this.text});
+void Function()? onTap;
+   _InfoCard({required this.icon, required this.text , this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(14.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.r),
-        boxShadow: [
-          BoxShadow(
-            color: const Color.fromARGB(101, 112, 109, 109),
-            blurRadius: 10.r,
-            offset: Offset(0, 10.h),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 18),
-          SizedBox(width: 12.w),
-          Text(text, style: TextStyle(fontSize: 16.sp)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(14.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(101, 112, 109, 109),
+              blurRadius: 10.r,
+              offset: Offset(0, 10.h),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 18),
+            SizedBox(width: 12.w),
+            Text(text, style: TextStyle(fontSize: 16.sp)),
+          ],
+        ),
       ),
     );
   }

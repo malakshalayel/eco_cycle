@@ -1,6 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class SubmissionController extends GetxController {
@@ -12,6 +18,7 @@ class SubmissionController extends GetxController {
     'Metal (Cans, Aluminum)',
     'Electronic Waste',
   ];
+final TextEditingController locationController = TextEditingController();
 
   //  Form Values 
   String? materialType;
@@ -24,6 +31,8 @@ class SubmissionController extends GetxController {
   File? selectedImage;
 
   final ImagePicker _picker = ImagePicker();
+final _fireStore = FirebaseFirestore.instance ; 
+final _auth = FirebaseAuth.instance ;
 
   //  Validation 
   bool get canSubmit =>
@@ -68,6 +77,28 @@ class SubmissionController extends GetxController {
       update();
     }
   }
+   //  Upload to Cloudinary
+  Future<String> uploadImageToCloudinary(File image) async {
+    const cloudName = 'dqkqcfyw0';
+    const uploadPreset = 'eco_cycle_unsigned';
+
+    final uri =
+        Uri.parse('https://api.cloudinary.com/v1_1/$cloudName/image/upload');
+
+    final request = http.MultipartRequest('POST', uri)
+      ..fields['upload_preset'] = uploadPreset
+      ..files.add(await http.MultipartFile.fromPath('file', image.path));
+
+    final response = await request.send();
+    final bytes = await response.stream.toBytes();
+    final result = json.decode(utf8.decode(bytes));
+
+    if (response.statusCode != 200) {
+      throw Exception('Cloudinary upload failed');
+    }
+
+    return result['secure_url'];
+  }
 
   void removeImage() {
     selectedImage = null;
@@ -76,12 +107,34 @@ class SubmissionController extends GetxController {
 
   //  Submit with loading
  Future<void> submit() async {
+  if (!canSubmit) return;
+
   try {
     isLoading = true;
     update();
 
+    final user = _auth.currentUser;
+    if (user == null) throw Exception('Not logged in');
+
+    final imageUrl = await uploadImageToCloudinary(selectedImage!);
+
+    await _fireStore.collection('submissions').add({
+      'userId': user.uid,
+      'materialType': materialType,
+      'quantity': quantity,
+      'location': location,
+      'imageUrl': imageUrl,
+      'status': 'pending',
+      'pointsAwarded': 0,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+
+    materialType = null;
+    quantity = null;
+    location = null;
+    selectedImage = null;
+    setQuantity('');
     
-    await Future.delayed(const Duration(seconds: 2));
 
     Get.snackbar(
       'Success',
@@ -89,17 +142,8 @@ class SubmissionController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: const Color(0xFF4CAF50),
       colorText: Colors.white,
-      margin: const EdgeInsets.all(16),
-      borderRadius: 12,
-      icon: const Icon(Icons.check_circle, color: Colors.white),
     );
-
-    //  تفريغ الفورم
-    materialType = null;
-    quantity = null;
-    location = null;
-    selectedImage = null;
-
+    Get.back();
   } catch (e) {
     Get.snackbar(
       'Error',
@@ -107,9 +151,6 @@ class SubmissionController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: const Color(0xFFE53935),
       colorText: Colors.white,
-      margin: const EdgeInsets.all(16),
-      borderRadius: 12,
-      icon: const Icon(Icons.error, color: Colors.white),
     );
   } finally {
     isLoading = false;
@@ -118,7 +159,42 @@ class SubmissionController extends GetxController {
 }
 
 
-  void useCurrentLocation() {
-    // TODO
+ 
+
+  Future<void> useCurrentLocation() async {
+  try {                                       
+    // 1️⃣ Check permission
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      Get.snackbar('Permission denied',
+          'Location permission permanently denied');
+      return;
+    }
+
+    // 2️⃣ Get position
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    // 3️⃣ Convert to address
+    final placemarks = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+
+    final place = placemarks.first;
+
+final value = '${place.locality}, ${place.country}';
+location = value;
+locationController.text = value;
+update();    update();
+  } catch (e) {
+    Get.snackbar('Error', 'Unable to get location');
   }
+}
+
 }

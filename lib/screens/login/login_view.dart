@@ -1,4 +1,3 @@
-import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:eco_cycle/screens/login/login_controller.dart';
 import 'package:eco_cycle/styles/text_style.dart';
 import 'package:eco_cycle/utils/assets.dart';
@@ -12,97 +11,123 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    
-         Scaffold(
-          body: Column(
-            children: [
-              Image.asset(login),
-              SizedBox(height: 20.h),
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
-              Text(
-                "Start the journey to a better earth",
-                style: AppTextStyles.body,
-              ),
+    return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: Column(
+        children: [
+          /// Top Image
+          Image.asset(login),
 
-              SizedBox(height: 20.h),
+          SizedBox(height: 20.h),
 
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Reduce. Reuse. Recycle",
-                      style: AppTextStyles.small,
-                    ),
-                    TextSpan(
-                      text: " Repeat.",
-                      style: AppTextStyles.body.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+          /// Title
+          Text(
+            "Start the journey to a better earth",
+            style: AppTextStyles.body(context),
+            textAlign: TextAlign.center,
+          ),
+
+          SizedBox(height: 20.h),
+
+          /// Subtitle
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "Reduce. Reuse. Recycle",
+                  style: AppTextStyles.small(context),
                 ),
-              ),
-
-              SizedBox(height: 40.h),
-              Text("Join EcoCycle today!", style: AppTextStyles.h2),
-              SizedBox(height: 90.h),
-
-              GetBuilder<LoginController>(
-                builder:(c)=> Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: ElevatedButton(
-                    onPressed: controller.isLoading
-                        ? null
-                        : controller.signInWithGoogle,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      padding: EdgeInsets.symmetric(vertical: 15.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                    ),
-                    child: controller.isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(googleLogo),
-                              SizedBox(width: 10.w),
-                              Text(
-                                "Sign In With Google",
-                                style: AppTextStyles.button.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                TextSpan(
+                  text: " Repeat.",
+                  style: AppTextStyles.body(context).copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+              ],
+            ),
+          ),
 
-              SizedBox(height: 20.h),
+          SizedBox(height: 40.h),
 
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "login as admin? ",
-                      style: AppTextStyles.small,
+          /// CTA
+          Text(
+            "Join EcoCycle today!",
+            style: AppTextStyles.h2(context),
+          ),
+
+          SizedBox(height: 90.h),
+
+          /// Google Sign In Button
+          GetBuilder<LoginController>(
+            builder: (c) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed:
+                      c.isLoading ? null : controller.signInWithGoogle,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colors.primary,
+                    foregroundColor: colors.onPrimary,
+                    padding: EdgeInsets.symmetric(vertical: 15.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
-                    TextSpan(
-                      text: "Admin",
-                      style: AppTextStyles.small.copyWith(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ],
+                  ),
+                  child: c.isLoading
+                      ? SizedBox(
+                          height: 22,
+                          width: 22,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: colors.onPrimary,
+                          ),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              googleLogo,
+                              height: 20,
+                            ),
+                            SizedBox(width: 10.w),
+                            Text(
+                              "Sign In With Google",
+                              style: AppTextStyles.button(context),
+                            ),
+                          ],
+                        ),
                 ),
               ),
-            ],
+            ),
           ),
-       
+
+          SizedBox(height: 20.h),
+
+          /// Admin Login Text
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "login as admin? ",
+                  style: AppTextStyles.small(context),
+                ),
+                TextSpan(
+                  text: "Admin",
+                  style: AppTextStyles.small(context).copyWith(
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

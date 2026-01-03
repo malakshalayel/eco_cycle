@@ -3,33 +3,32 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../history_controller.dart';
 import '../../../constants/app_colors.dart';
-
-class HistorySummarySection extends GetView<HistoryController> {
+class HistorySummarySection extends StatelessWidget {
   const HistorySummarySection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12.r),
-          bottomRight: Radius.circular(12.r),
-        ),
-      ),
       padding: EdgeInsets.all(16.w),
-      child: Row(
-        children: [
-          _SummaryCard(
-            title: 'Total Submission',
-            value: controller.totalSubmissions.toString(),
-          ),
-          SizedBox(width: 30.w),
-          _SummaryCard(
-            title: 'Points Earned',
-            value: controller.totalPoints.toString(),
-          ),
-        ],
+      color: theme.colorScheme.primary,
+      child: GetBuilder<HistoryController>(
+        builder: (controller) {
+          return Row(
+            children: [
+              _SummaryCard(
+                title: 'Total Submissions',
+                value: controller.totalSubmissions.toString(),
+              ),
+              SizedBox(width: 20.w),
+              _SummaryCard(
+                title: 'Points Earned',
+                value: controller.totalPoints.toString(),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -43,24 +42,25 @@ class _SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontSize: 14.sp ,fontWeight: FontWeight.w600),),
+            Text(title, style: theme.textTheme.bodySmall),
             SizedBox(height: 6.h),
             Text(
               value,
-              style: TextStyle(
-                fontSize: 20.sp,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
-                color: AppColors.primary,
               ),
             ),
           ],

@@ -1,68 +1,75 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eco_cycle/screens/history/model/submission_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum SubmissionStatus { approved, pending, rejected }
 
-class HistoryItem {
-  final String title;
-  final String quantity;
-  final String date;
-  final int points;
-  final SubmissionStatus status;
-  final String image;
-  final String? note;
+// class HistoryItem {
+//   final String title;
+//   final String quantity;
+//   final String date;
+//   final int points;
+//   final SubmissionStatus status;
+//   final String image;
+//   final String? note;
 
-  HistoryItem({
-    required this.title,
-    required this.quantity,
-    required this.date,
-    required this.points,
-    required this.status,
-    required this.image,
-    this.note,
-  });
-}
+//   HistoryItem({
+//     required this.title,
+//     required this.quantity,
+//     required this.date,
+//     required this.points,
+//     required this.status,
+//     required this.image,
+//     this.note,
+//   });
+// }
 
 class HistoryController extends GetxController {
-  final List<HistoryItem> items = [
-    HistoryItem(
-      title: 'Plastic Bottles',
-      quantity: '5 Bottles',
-      date: '20-12-2024',
-      points: 50,
-      status: SubmissionStatus.approved,
-      image: 'assets/images/plastic.jpg',
-    ),
-    HistoryItem(
-      title: 'Glass Jars',
-      quantity: '3 Jars',
-      date: '18-12-2024',
-      points: 0,
-      status: SubmissionStatus.pending,
-      image: 'assets/images/plastic.jpg',
-    ),
-    HistoryItem(
-      title: 'Paper Cardboard',
-      quantity: '2 Kg',
-      date: '15-12-2024',
-      points: 30,
-      status: SubmissionStatus.approved,
-      image: 'assets/images/plastic.jpg',
-    ),
-    HistoryItem(
-      title: 'Metal Cans',
-      quantity: '8 Cans',
-      date: '12-12-2024',
-      points: 0,
-      status: SubmissionStatus.rejected,
-      image: 'assets/images/plastic.jpg',
-      note:
-          'Items not clean enough for recycling.\nPlease rinse containers before submitting.',
-    ),
-  ];
+bool isLoading = true; 
+final _fireStore = FirebaseFirestore.instance ; 
+final _auth = FirebaseAuth.instance ;
+List<SubmissionModel> submissions = [];
+@override
+ onInit(){
+    super.onInit(); 
+fetchHistory();
+print('SUBMISSIONS COUNT: ${submissions.length}');
 
-  int get totalSubmissions => items.length;
+}
+Future<void> fetchHistory() async {
+  try {
+    isLoading = true;
+    update();
 
-  int get totalPoints => items
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    final snapshot = await _fireStore
+        .collection('submissions')
+        .where('userId', isEqualTo: user.uid)
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    submissions = snapshot.docs
+        .map((doc) => SubmissionModel.fromFirestore(doc))
+        .toList();
+
+    update();
+  } catch (e) {
+    debugPrint('History error: $e');
+  } finally {
+    isLoading = false;
+    update();
+  }
+}
+
+
+
+  int get totalSubmissions => submissions.length;
+
+  int get totalPoints => submissions
       .where((e) => e.status == SubmissionStatus.approved)
-      .fold(0, (sum, e) => sum + e.points);
+      .fold(0, (sum, e) => sum);
 }
