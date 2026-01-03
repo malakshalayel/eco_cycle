@@ -16,5 +16,5 @@ class Routes {
   // Admin Screens
   static const ADMIN_LOGIN = '/admin-login';
   static const ADMIN_HOME = '/admin-home';
-  static const ADMIN_SUBMISSIONS = '/admin-submissions';
+  static const ADMIN_SUBMISSIONS_REVIEW = '/admin-submissions-review';
 }

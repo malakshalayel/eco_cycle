@@ -17,9 +17,13 @@ class HistoryView extends GetView<HistoryController> {
         backgroundColor: AppColors.primary,
         title: Text(
           'Submission History',
-          style: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        leading: Icon(Icons.arrow_back, size: 22.sp,color: Colors.white),
+        leading: Icon(Icons.arrow_back, size: 22.sp, color: Colors.white),
       ),
       body: const Column(
         children: [

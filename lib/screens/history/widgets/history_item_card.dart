@@ -1,4 +1,3 @@
-import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../history_controller.dart';
@@ -6,9 +5,7 @@ import 'history_status_badge.dart';
 
 class HistoryItemCard extends StatelessWidget {
   final HistoryItem item;
-
   const HistoryItemCard({super.key, required this.item});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +14,6 @@ class HistoryItemCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Color(0XFF2ECC71).withOpacity(0.8)),
-        
       ),
       child: Column(
         children: [
@@ -49,10 +45,10 @@ class HistoryItemCard extends StatelessWidget {
                       '${item.quantity} ',
                       style: TextStyle(
                         fontSize: 13.sp,
-                         fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                     SizedBox(height: 4.h),
+                    SizedBox(height: 4.h),
                     Text(
                       ' ${item.date}',
                       style: TextStyle(
