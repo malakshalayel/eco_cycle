@@ -1,4 +1,10 @@
 import 'package:eco_cycle/routes/app_routes.dart';
+import 'package:eco_cycle/screens/admin/admin_home/admin_home_bindings.dart';
+import 'package:eco_cycle/screens/admin/admin_home/admin_home_view.dart';
+import 'package:eco_cycle/screens/admin/login/admin_login_binding.dart';
+import 'package:eco_cycle/screens/admin/login/admin_login_view.dart';
+import 'package:eco_cycle/screens/admin/submissions_review/submissions_review_binding.dart';
+import 'package:eco_cycle/screens/admin/submissions_review/submissions_review_view.dart';
 import 'package:eco_cycle/screens/history/history_binding.dart';
 import 'package:eco_cycle/screens/history/history_view.dart';
 import 'package:eco_cycle/screens/home/home_bindings.dart';
@@ -21,7 +27,7 @@ import 'package:get/get.dart';
 
 class AppPages {
   AppPages._();
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.ADMIN_SUBMISSIONS_REVIEW;
 
   static final routes = <GetPage>[
     GetPage(
@@ -70,5 +76,22 @@ class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
+     GetPage(
+      name: Routes.ADMIN_LOGIN,
+      page: () => const AdminLoginView(),
+      binding: AdminLoginBinding(),
+    ),
+
+    GetPage(
+      name: Routes.ADMIN_HOME,
+      page: () => const AdminHomeView(),
+      binding: AdminHomeBinding(),
+    ),
+    GetPage(
+      name: Routes.ADMIN_SUBMISSIONS_REVIEW,
+      page: () => const SubmissionsReviewView(),
+      binding: SubmissionsReviewBinding(),
+    ),
+
   ];
 }
