@@ -1,104 +1,23 @@
-import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
 
-// class AppTheme {
-//   static ThemeData lightTheme = ThemeData(
-//     useMaterial3: true,
-//     scaffoldBackgroundColor: Colors.white,
-//     fontFamily: Get.locale?.countryCode == 'en' ? 'Roboto' : 'Cairo',
-//     appBarTheme: const AppBarTheme(
-//       backgroundColor: Colors.white,
-//       elevation: 0,
-//       centerTitle: true,
-//       foregroundColor: Colors.black,
-//     ),
-//   );
-
-//   static ThemeData darkTheme = ThemeData(
-//     useMaterial3: true,
-//     scaffoldBackgroundColor: Colors.black,
-//     fontFamily: Get.locale?.countryCode == 'en' ? 'Roboto' : 'Cairo',
-//     appBarTheme: const AppBarTheme(
-//       backgroundColor: Colors.black,
-//       elevation: 0,
-//       centerTitle: true,
-//       foregroundColor: Colors.white,
-//     ),
-//   );
-// }
-
-// class AppTheme {
-//  static ThemeData lightTheme = ThemeData(
-//   useMaterial3: true,
-//   scaffoldBackgroundColor: const Color(0xFFF6F6F6),
-
-//   colorScheme: ColorScheme.light(
-//     primary: const Color(0xFF6A5FA8), // نفس لون الهوم
-//     onPrimary: Colors.white,
-//   ),
-
-//   appBarTheme: const AppBarTheme(
-//     backgroundColor: Color(0xFF6A5FA8),
-//     foregroundColor: Colors.white,
-//     elevation: 0,
-//     centerTitle: true,
-//   ),
-
-//   textTheme: const TextTheme(
-//     titleLarge: TextStyle(
-//       fontSize: 18,
-//       fontWeight: FontWeight.w600,
-//       color: Colors.white,
-//     ),
-//   ),
-// );
-
-//  static ThemeData darkTheme = ThemeData(
-//   brightness: Brightness.dark,
-//   scaffoldBackgroundColor: AppColors.darkBg,
-//   primaryColor: AppColors.primary,
-
-//   cardColor: AppColors.darkCard,
-
-//   textTheme: const TextTheme(
-//     bodyLarge: TextStyle(
-//       color: Color(0xFFEDEDED), // primary text
-//     ),
-//     bodyMedium: TextStyle(
-//       color: Color(0xFFCCCCCC),
-//     ),
-//     bodySmall: TextStyle(
-//       color: Color(0xFFB3B3B3),
-//     ),
-//   ),
-
-//    appBarTheme: const AppBarTheme(
-//     backgroundColor: Color(0xFF6A5FA8),
-//     foregroundColor: Colors.white,
-//     elevation: 0,
-//     centerTitle: true,
-//   ),
-// );
-
-// }
 class AppTheme {
-  /// 🌞 Light Theme (نفس روح الدارك لكن أفتح)
+  /// 🌤 Light Theme (Eco – Soft & Natural)
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
 
-    scaffoldBackgroundColor: const Color(0xFFF4F3F9),
+    scaffoldBackgroundColor: const Color(0xFFF6F7F3), // off-white طبيعي
 
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFF6A5FA8),
+      primary: Color(0xFF5E7F6A), // Sage Green
       onPrimary: Colors.white,
-      surface: Colors.white,
-      onSurface: Color(0xFF1A1A1A),
+      surface: Color(0xFFFFFFFF),
+      onSurface: Color(0xFF1E2B24),
+      secondary: Color(0xFF8FB9A8), // أخضر فاتح للأكسنت
     ),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF6A5FA8),
+      backgroundColor: Color(0xFF5E7F6A),
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
@@ -106,61 +25,62 @@ class AppTheme {
 
     cardColor: Colors.white,
 
+    dividerColor: Color(0xFFE1E5DF),
+
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
-        color: Colors.white, // AppBar title
+        color: Colors.white, // AppBar
       ),
       bodyLarge: TextStyle(
-        color: Color(0xFF1A1A1A),
+        color: Color(0xFF1E2B24),
       ),
       bodyMedium: TextStyle(
-        color: Color(0xFF4A4A4A),
+        color: Color(0xFF4A5A52),
       ),
       bodySmall: TextStyle(
-        color: Color(0xFF7A7A7A),
+        color: Color(0xFF7B8A82),
       ),
     ),
-
-    dividerColor: Color(0xFFE0E0E0),
   );
 
-  /// 🌙 Dark Theme
+  /// 🌙 Dark Theme (Eco – Deep Forest)
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
 
-    scaffoldBackgroundColor: const Color(0xFF0F0F14),
+    scaffoldBackgroundColor: const Color(0xFF0E1512), // أخضر غامق جدًا
 
     colorScheme: const ColorScheme.dark(
-      primary: Color(0xFF6A5FA8),
+      primary: Color(0xFF6FA58E), // Sage مضيء
       onPrimary: Colors.white,
-      surface: Color(0xFF1C1C23),
-      onSurface: Color(0xFFEDEDED),
+      surface: Color(0xFF1A2420),
+      onSurface: Color(0xFFE6EFEA),
+      secondary: Color(0xFF8FB9A8),
     ),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF6A5FA8),
+      backgroundColor: Color(0xFF1A2420), // غامق مع texture
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
     ),
 
-    cardColor: const Color(0xFF1C1C23),
+    cardColor: const Color(0xFF1A2420),
+
+    dividerColor: Color(0xFF2A3A33),
 
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
-        color: Color(0xFFEDEDED),
+        color: Color(0xFFE6EFEA),
       ),
       bodyMedium: TextStyle(
-        color: Color(0xFFCCCCCC),
+        color: Color(0xFFB8C5BF),
       ),
       bodySmall: TextStyle(
-        color: Color(0xFFB3B3B3),
+        color: Color(0xFF8F9F98),
       ),
     ),
-
-    dividerColor: Color(0xFF2A2A33),
   );
 }

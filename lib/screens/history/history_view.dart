@@ -16,7 +16,7 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
 
-      appBar: AppAppBar(title: "Submission History"),
+      appBar: AppAppBar(title: "Submission History" , withBorder: false,),
 
       body: GetBuilder<HistoryController>(
         init: HistoryController(),

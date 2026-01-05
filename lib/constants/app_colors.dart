@@ -32,3 +32,4 @@ class AppColors {
   static const textPrimaryDark = Color(0xFFEDEDED);
   static const textSecondaryDark = Color(0xFFB3B3B3);
 }
+

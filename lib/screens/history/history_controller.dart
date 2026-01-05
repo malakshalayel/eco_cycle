@@ -34,36 +34,29 @@ List<SubmissionModel> submissions = [];
 @override
  onInit(){
     super.onInit(); 
-fetchHistory();
+historyStream();
 print('SUBMISSIONS COUNT: ${submissions.length}');
 
 }
-Future<void> fetchHistory() async {
-  try {
-    isLoading = true;
-    update();
+Stream<List<SubmissionModel>> historyStream() {
+  final user = _auth.currentUser;
 
-    final user = _auth.currentUser;
-    if (user == null) return;
-
-    final snapshot = await _fireStore
-        .collection('submissions')
-        .where('userId', isEqualTo: user.uid)
-        .orderBy('createdAt', descending: true)
-        .get();
-
-    submissions = snapshot.docs
-        .map((doc) => SubmissionModel.fromFirestore(doc))
-        .toList();
-
-    update();
-  } catch (e) {
-    debugPrint('History error: $e');
-  } finally {
-    isLoading = false;
-    update();
+  if (user == null) {
+    return const Stream.empty();
   }
+
+  return _fireStore
+      .collection('submissions')
+      .where('userId', isEqualTo: user.uid)
+      .orderBy('createdAt', descending: true)
+      .snapshots()
+      .map((querySnapshot) {
+        return querySnapshot.docs
+            .map((doc) => SubmissionModel.fromFirestore(doc))
+            .toList();
+      });
 }
+
 
 
 

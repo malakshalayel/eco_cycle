@@ -1,5 +1,6 @@
 import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:eco_cycle/routes/app_routes.dart';
+import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,19 @@ class HomeHeaderWidget extends GetView<HomeController> {
           onTap: () => Get.toNamed(Routes.PROFILE),
           child: Container(
             padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 40.h),
-            color: theme.colorScheme.primary,
+              decoration: BoxDecoration(
+                           // color: theme.colorScheme.primary,
+
+                  image: DecorationImage(
+                    image: AssetImage(ecoBackground),
+                    fit: BoxFit.cover,
+                    repeat: ImageRepeat.repeat, // مهم للـ texture
+                    colorFilter: ColorFilter.mode(
+                      theme.colorScheme.primary.withOpacity(.2),
+                      BlendMode.srcATop,
+                    ),
+                  ),
+                ),
             child: Row(
               children: [
                 CircleAvatar(
@@ -64,21 +77,29 @@ class HomeHeaderWidget extends GetView<HomeController> {
   }
 }
 
-
 class _HeaderSkeleton extends StatelessWidget {
   const _HeaderSkeleton();
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     final baseColor = isDark
-        ? Colors.white.withOpacity(0.08)
+        ? Colors.white.withOpacity(0.12)
         : Colors.black.withOpacity(0.08);
 
     return Container(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 40.h, bottom: 16.h),
-      color: AppColors.primary,
+      padding: EdgeInsets.only(
+        left: 16.w,
+        right: 16.w,
+        top: 40.h,
+        bottom: 16.h,
+      ),
+
+      // ✅ خليه من الثيم مش لون ثابت
+      color: theme.colorScheme.primary,
+
       child: Row(
         children: [
           /// Avatar Skeleton
@@ -115,6 +136,7 @@ class _HeaderSkeleton extends StatelessWidget {
     );
   }
 }
+
 
 /// 🔹 Reusable line
 class _SkeletonLine extends StatelessWidget {

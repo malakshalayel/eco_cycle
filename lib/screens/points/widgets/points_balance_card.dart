@@ -1,3 +1,4 @@
+import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,12 +14,18 @@ class PointsBalanceCard extends GetView<PointsController> {
 
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.primary, // لون الهوم
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12.r),
-          bottomRight: Radius.circular(12.r),
-        ),
-      ),
+                            color: theme.colorScheme.primary,
+
+                  image: DecorationImage(
+                    image: AssetImage(ecoBackground),
+                    fit: BoxFit.cover,
+                    repeat: ImageRepeat.repeat, // مهم للـ texture
+                    colorFilter: ColorFilter.mode(
+                      theme.colorScheme.primary.withOpacity(.2),
+                      BlendMode.srcATop,
+                    ),
+                  ),
+                ),
       padding: EdgeInsets.all(16.w),
       child: Container(
         padding: EdgeInsets.all(14.w),

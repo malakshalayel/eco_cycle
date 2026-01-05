@@ -2,6 +2,7 @@ import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:eco_cycle/screens/home/home_controller.dart';
 import 'package:eco_cycle/screens/home/widgets/home_header.dart';
 import 'package:eco_cycle/screens/home/widgets/total_points_card.dart';
+import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -14,7 +15,18 @@ class HomeTopSection extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      color: theme.colorScheme.primary,
+          decoration: BoxDecoration(
+
+                  image: DecorationImage(
+                    image: AssetImage(ecoBackground),
+                    fit: BoxFit.cover,
+                    repeat: ImageRepeat.repeat, // مهم للـ texture
+                    colorFilter: ColorFilter.mode(
+                      theme.colorScheme.primary.withOpacity(.2),
+                      BlendMode.srcATop,
+                    ),
+                  ),
+                ),
       //padding: EdgeInsets.only(bottom: 20.h),
       child: Column(
         children: [

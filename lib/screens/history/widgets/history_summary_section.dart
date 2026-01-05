@@ -1,9 +1,12 @@
+import 'package:eco_cycle/screens/history/model/submission_model.dart';
+import 'package:eco_cycle/screens/submission/submission_controller.dart';
+import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../history_controller.dart';
 import '../../../constants/app_colors.dart';
-class HistorySummarySection extends StatelessWidget {
+class HistorySummarySection extends GetView<HistoryController> {
   const HistorySummarySection({super.key});
 
   @override
@@ -11,24 +14,48 @@ class HistorySummarySection extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
+          decoration: BoxDecoration(
+                            color: theme.colorScheme.primary,
+
+                  image: DecorationImage(
+                    image: AssetImage(ecoBackground),
+                    fit: BoxFit.cover,
+                    repeat: ImageRepeat.repeat, // مهم للـ texture
+                    colorFilter: ColorFilter.mode(
+                      theme.colorScheme.primary.withOpacity(.2),
+                      BlendMode.srcATop,
+                    ),
+                  ),
+                ),
       padding: EdgeInsets.all(16.w),
-      color: theme.colorScheme.primary,
-      child: GetBuilder<HistoryController>(
-        builder: (controller) {
-          return Row(
+      child: StreamBuilder<List<SubmissionModel>>(
+          stream: controller.historyStream(),
+  builder: (BuildContext context, AsyncSnapshot<List<SubmissionModel>> snapshot) { 
+      if (!snapshot.hasData) return const SizedBox();
+
+    final submissions = snapshot.data!;
+
+    final totalSubmissions = submissions.length;
+
+    final totalPoints = submissions
+        .where((e) => e.status == SubmissionStatus.approved)
+        .fold<int>(0, (sum, e) => sum + e.pointsAwarded);
+return Row(
             children: [
               _SummaryCard(
                 title: 'Total Submissions',
-                value: controller.totalSubmissions.toString(),
+                value:totalSubmissions.toString(),
               ),
               SizedBox(width: 20.w),
               _SummaryCard(
                 title: 'Points Earned',
-                value: controller.totalPoints.toString(),
+                value: totalPoints.toString(),
               ),
             ],
           );
-        },
+   },
+
+    
       ),
     );
   }

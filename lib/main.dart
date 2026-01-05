@@ -20,14 +20,7 @@ void main() async {
   );
       Get.put<AuthService>(AuthService(), permanent: true);
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark, // للـ Light Mode
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ),
-  );
+
   Get.put(LanguageServices());
   Get.put(ThemeServices());
   runApp(const MyApp());

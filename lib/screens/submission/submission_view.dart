@@ -19,7 +19,7 @@ import 'package:eco_cycle/widgets/app_app_bar.dart';
 
       return Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
-appBar : AppAppBar(title: "Submit Recyclable" , withBorder: false,),
+appBar : AppAppBar(title: "Submit Recyclable" , withBorder: true,),
 
 
         body: GetBuilder<SubmissionController>(
