@@ -1,3 +1,5 @@
+import 'package:eco_cycle/constants/app_colors.dart';
+import 'package:eco_cycle/routes/app_routes.dart';
 import 'package:eco_cycle/screens/admin/login/admin_login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +13,7 @@ class AdminLoginView extends StatelessWidget {
     return GetBuilder<AdminLoginController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: const Color(0xFF2ECC71),
+          backgroundColor: AppColors.primaryDark,
           body: SafeArea(
             child: Center(
               child: Padding(
@@ -185,7 +187,7 @@ class AdminLoginView extends StatelessWidget {
 
                           // Back
                           TextButton(
-                            onPressed: controller.backToUserApp,
+                            onPressed:(){Get.toNamed(Routes.LOGIN);},
                             child: const Text(
                               '← Back to User App',
                               style: TextStyle(color: Color(0xFF2ECC71)),

@@ -12,6 +12,7 @@ class Routes {
   static const SUBMISSION_HISTORY = '/submission-history';
   static const POINTS = '/points';
   static const PROFILE = '/profile';
+  static const NAVIGATION = '/navigation';
 
   // Admin Screens
   static const ADMIN_LOGIN = '/admin-login';

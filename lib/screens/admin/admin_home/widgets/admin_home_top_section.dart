@@ -1,4 +1,5 @@
 import 'package:eco_cycle/constants/app_colors.dart';
+import 'package:eco_cycle/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,12 +48,15 @@ class AdminHomeTopSection extends GetView<AdminHomeController> {
                   ),
                 ],
               ),
-              Row(
-                children: const [
-                  Icon(Icons.logout, color: Colors.white, size: 18),
-                  SizedBox(width: 4),
-                  Text('LogOut', style: TextStyle(color: Colors.white)),
-                ],
+              GestureDetector(
+                onTap: (){ Get.toNamed(Routes.ADMIN_LOGIN);},
+                child: Row(
+                  children: const [
+                    Icon(Icons.logout, color: Colors.white, size: 18),
+                    SizedBox(width: 4),
+                    Text('LogOut', style: TextStyle(color: Colors.white)),
+                  ],
+                ),
               ),
             ],
           ),

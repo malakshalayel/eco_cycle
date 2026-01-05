@@ -7,6 +7,7 @@ const String onB1 = '$imagePath/onB1.png';
 const String onB2 = '$imagePath/onB2.png';
 const String onB3 = '$imagePath/onB3.png';
 const String login = '$imagePath/login.png';
+const String ecoBackground = '$imagePath/eco_background.jpg';
 
 
 // ************icons************

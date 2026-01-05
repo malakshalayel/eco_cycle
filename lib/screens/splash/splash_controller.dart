@@ -22,7 +22,7 @@ class SplashController extends GetxController {
       return;
     }
     if ( _authService.currentUser != null) {
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.NAVIGATION);
     } else {
       Get.offAllNamed(Routes.ONBOARDING);
     }

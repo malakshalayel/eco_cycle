@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../constants/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyles {
   // Titles
-  static TextStyle h1 = TextStyle(
-    fontSize: 28.sp,
-    fontWeight: FontWeight.bold,
-    color: AppColors.black,
-  );
+  static TextStyle h1(BuildContext context) => TextStyle(
+        fontSize: 28.sp,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).textTheme.bodyLarge?.color,
+      );
 
-  static TextStyle h2 = TextStyle(
-    fontSize: 22.sp,
-    fontWeight: FontWeight.w600,
-    color: AppColors.black,
-  );
+  static TextStyle h2(BuildContext context) => TextStyle(
+        fontSize: 22.sp,
+        fontWeight: FontWeight.w600,
+        color: Theme.of(context).textTheme.bodyLarge?.color,
+      );
 
   // Body Text
-  static TextStyle body = TextStyle(fontSize: 16.sp, color: AppColors.black);
+  static TextStyle body(BuildContext context) => TextStyle(
+        fontSize: 16.sp,
+        color: Theme.of(context).textTheme.bodyMedium?.color,
+      );
 
-  static TextStyle bodyGrey = TextStyle(
-    fontSize: 16.sp,
-    color: AppColors.greyDark,
-  );
+  static TextStyle bodyGrey(BuildContext context) => TextStyle(
+        fontSize: 16.sp,
+        color: Theme.of(context).textTheme.bodySmall?.color,
+      );
 
   // Small Text
-  static TextStyle small = TextStyle(
-    fontSize: 13.sp,
-    color: AppColors.greyDark,
-  );
+  static TextStyle small(BuildContext context) => TextStyle(
+        fontSize: 13.sp,
+        color: Theme.of(context).textTheme.bodySmall?.color,
+      );
 
-  // Buttons
-  static TextStyle button = TextStyle(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w600,
-    color: AppColors.white,
-  );
+  // Buttons (غالبًا أبيض على Primary)
+  static TextStyle button(BuildContext context) => TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
+        color: Theme.of(context).colorScheme.onPrimary,
+      );
 }

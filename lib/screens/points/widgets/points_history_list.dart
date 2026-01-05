@@ -1,53 +1,56 @@
+import 'package:eco_cycle/screens/points/model/points_history_model.dart';
+import 'package:eco_cycle/screens/points/model/points_history_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../points_controller.dart';
 import '../../../constants/app_colors.dart';
-
 class PointsHistoryList extends GetView<PointsController> {
   const PointsHistoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Title
-          Text(
-            'Conversion History',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-      
-          SizedBox(height: 12.h),
-      
-          /// Empty State
-          if (controller.history.isEmpty)
-            const _EmptyHistoryState()
-          else
-            Column(
-              children: controller.history.map((item) {
-                return _HistoryCard(item: item);
-              }).toList(),
-            ),
-        ],
-      ),
+    return StreamBuilder<List<PointsHistoryModel>>(
+      stream: controller.historyStream(),
+      builder: (context, snapshot) {
+
+        /// 🔄 Loading (first frame)
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const PointsHistorySkeleton();
+        }
+
+        /// ❌ No data
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const _EmptyHistoryState();
+        }
+
+        final history = snapshot.data!;
+
+        /// ✅ List
+        return ListView.separated(
+          padding: EdgeInsets.all(16.w),
+          itemCount: history.length,
+          separatorBuilder: (_, __) => SizedBox(height: 12.h),
+          itemBuilder: (context, index) {
+            return _HistoryCard(item: history[index]);
+          },
+        );
+      },
     );
   }
 }
 
+
+
 class _HistoryCard extends StatelessWidget {
-  final PointsHistoryItem item;
+  final PointsHistoryModel item;
 
   const _HistoryCard({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    final bool isApproved = item.status == 'Approved';
+    final status = item.status.toLowerCase();
+    final bool isApproved = status == 'approved';
 
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
@@ -57,37 +60,30 @@ class _HistoryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: AppColors.primary.withOpacity(0.6),
-          width: 1.3,
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Left Content
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.title,
+                  status.capitalizeFirst!,
                   style: TextStyle(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
                 SizedBox(height: 6.h),
-
                 Text(
-                  item.date,
+                  '${item.date.day}/${item.date.month}/${item.date.year}',
                   style: TextStyle(
                     fontSize: 11.sp,
                     color: Colors.grey,
                   ),
                 ),
-
                 SizedBox(height: 6.h),
-
                 Text(
                   'Points used: ${item.points.abs()}',
                   style: TextStyle(
@@ -99,9 +95,8 @@ class _HistoryCard extends StatelessWidget {
             ),
           ),
 
-          /// Status Badge
           _StatusBadge(
-            title: item.status,
+            title: status.capitalizeFirst!,
             isApproved: isApproved,
           ),
         ],
@@ -109,6 +104,7 @@ class _HistoryCard extends StatelessWidget {
     );
   }
 }
+
 class _StatusBadge extends StatelessWidget {
   final String title;
   final bool isApproved;

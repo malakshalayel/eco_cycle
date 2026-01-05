@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../constants/app_colors.dart';
 import '../../../styles/text_style.dart';
 import '../submission_controller.dart';
 
@@ -10,60 +9,70 @@ class LocationWidget extends GetView<SubmissionController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return Center(
       child: Container(
         width: 333.w,
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            width: 2,
-            color: const Color(0xFF37CE76).withOpacity(0.5),
+            width: 1.5,
+            color: colors.primary.withOpacity(0.4),
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, 
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Title
+            /// Title
             Text(
               'Collection Location',
-              style: AppTextStyles.body,
+              style: AppTextStyles.body(context),
             ),
 
             SizedBox(height: 8.h),
 
-            // Input
+            /// Input
             Container(
-              
-              height: 38.h,
+              height: 40.h,
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               decoration: BoxDecoration(
-                color: AppColors.greyLight,
+                color: theme.inputDecorationTheme.fillColor ??
+                    colors.surfaceVariant,
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: TextField(
-                onChanged: controller.setLocation,
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.location_on, size: 18),
-                  hintText: 'Enter Your location or address',
+                controller: controller.locationController,
+                readOnly: true,
+                style: AppTextStyles.body(context),
+                decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.location_on,
+                    size: 18,
+                    color: colors.primary,
+                  ),
+                  hintText: 'Enter your location',
+                  hintStyle: AppTextStyles.small(context),
                   border: InputBorder.none,
                 ),
               ),
             ),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
 
-            // Button
+            /// Button
             SizedBox(
               height: 38.h,
+              width: double.infinity,
               child: OutlinedButton(
                 onPressed: controller.useCurrentLocation,
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                    color: Color(0xFF37CE76),
-                  ),
+                  foregroundColor: colors.primary,
+                  side: BorderSide(color: colors.primary),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),
                   ),
@@ -71,9 +80,8 @@ class LocationWidget extends GetView<SubmissionController> {
                 child: Text(
                   'Use Current Location',
                   style: TextStyle(
-                    color: const Color(0xFF37CE76),
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

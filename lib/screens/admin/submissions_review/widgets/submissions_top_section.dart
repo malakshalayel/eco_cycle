@@ -145,7 +145,7 @@ class SubmissionsTopSection extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           alignment: Alignment.centerLeft,
                           color: isSelected
-                              ? AppColors.greyLight
+                              ? AppColors.primaryDark
                               : Colors.transparent,
                           child: Text(
                             item,
