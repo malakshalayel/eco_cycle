@@ -20,14 +20,7 @@ void main() async {
   );
       Get.put<AuthService>(AuthService(), permanent: true);
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark, // للـ Light Mode
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ),
-  );
+
   Get.put(LanguageServices());
   Get.put(ThemeServices());
   runApp(const MyApp());
@@ -39,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final langServices = Get.find<LanguageServices>();
-    final themeServices = Get.find<ThemeServices>();
+    final _themeServices = Get.find<ThemeServices>();
     return ScreenUtilInit(
       designSize: const Size(390, 844), // مطابق للفيجما
       minTextAdapt: true,
@@ -47,9 +40,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         translations: AppTranslations(),
         locale: langServices.currentLocale(),
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: themeServices.theme(),
+        //theme: AppTheme.lightTheme,
+       // darkTheme: AppTheme.darkTheme,
+       // themeMode: themeServices.theme(),
+             theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: _themeServices.theme,
         fallbackLocale: const Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         initialRoute: AppPages.INITIAL,

@@ -9,16 +9,18 @@ import '../submission/submission_view.dart';
 import '../history/history_view.dart';
 import '../points/points_view.dart';
 import '../profile/profile_view.dart';
-
 class NavigationView extends GetView<NavigationController> {
   const NavigationView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GetBuilder<NavigationController>(
       builder: (c) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: theme.scaffoldBackgroundColor,
+
           body: IndexedStack(
             index: c.currentIndex,
             children: const [
@@ -29,12 +31,16 @@ class NavigationView extends GetView<NavigationController> {
               ProfileView(),
             ],
           ),
+
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: c.currentIndex,
             onTap: c.changeTab,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: Colors.grey,
+
+            backgroundColor: theme.colorScheme.surface,
+            selectedItemColor: theme.colorScheme.primary,
+            unselectedItemColor: theme.colorScheme.onSurface.withOpacity(0.5),
+
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
@@ -46,15 +52,15 @@ class NavigationView extends GetView<NavigationController> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.history),
-                label: 'history',
+                label: 'History',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.card_giftcard),
-                label: 'points',
+                label: 'Points',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
-                label: 'profile',
+                label: 'Profile',
               ),
             ],
           ),

@@ -13,11 +13,18 @@ class PointsTabContent extends GetView<PointsController> {
       builder: (_) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 250),
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
           child: controller.currentTab == PointsTab.redeem
-              ? const RedeemPointsCard()
-              : const PointsHistoryList(),
+              ? const RedeemPointsCard(
+                  key: ValueKey('redeem'),
+                )
+              : const PointsHistoryList(
+                  key: ValueKey('history'),
+                ),
         );
       },
     );
   }
 }
+

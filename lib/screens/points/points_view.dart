@@ -1,3 +1,4 @@
+import 'package:eco_cycle/widgets/app_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,16 +14,9 @@ class PointsView extends GetView<PointsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: Text(
-          'Points & Rewards',
-          style: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-                leading: Icon(Icons.arrow_back, size: 22.sp,color: Colors.white),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
-      ),
+      appBar: AppAppBar(title: "Points & Rewards", withBorder: false,),
       body: SingleChildScrollView(
         child: Column(
           children:  [

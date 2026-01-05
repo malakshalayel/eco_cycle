@@ -4,21 +4,22 @@ import 'package:eco_cycle/styles/text_style.dart';
 import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../constants/app_colors.dart';
 
 class OnboardingView extends GetView<OnBoardingController> {
   const OnboardingView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: GetBuilder<OnBoardingController>(
         builder: (c) {
           return Column(
             children: [
-
-              // Skip Button
+              /// Skip Button
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
@@ -29,13 +30,14 @@ class OnboardingView extends GetView<OnBoardingController> {
                       onPressed: c.skip,
                       child: Text(
                         "Skip",
-                        style: AppTextStyles.body,
+                        style: AppTextStyles.body(context),
                       ),
                     ),
                   ),
-                )
+                ),
               ),
 
+              /// Pages
               Expanded(
                 child: PageView(
                   controller: c.pageController,
@@ -60,7 +62,7 @@ class OnboardingView extends GetView<OnBoardingController> {
                 ),
               ),
 
-              // Dots Indicator
+              /// Dots Indicator
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
@@ -72,8 +74,8 @@ class OnboardingView extends GetView<OnBoardingController> {
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     decoration: BoxDecoration(
                       color: c.currentIndex == index
-                          ? AppColors.primary
-                          : AppColors.greyLight,
+                          ? colors.primary
+                          : colors.surfaceVariant,
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
@@ -82,7 +84,7 @@ class OnboardingView extends GetView<OnBoardingController> {
 
               const SizedBox(height: 20),
 
-              // Next Button
+              /// Next Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: SizedBox(
@@ -91,14 +93,15 @@ class OnboardingView extends GetView<OnBoardingController> {
                   child: ElevatedButton(
                     onPressed: c.nextPage,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: colors.primary,
+                      foregroundColor: colors.onPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: Text(
-                      c.currentIndex == 2 ? "Get Start Now" : "Next",
-                      style: AppTextStyles.button,
+                      c.currentIndex == 2 ? "Get Started" : "Next",
+                      style: AppTextStyles.button(context),
                     ),
                   ),
                 ),
