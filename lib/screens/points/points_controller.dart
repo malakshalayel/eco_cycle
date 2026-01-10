@@ -1,4 +1,6 @@
 
+import 'dart:async';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eco_cycle/screens/points/model/points_history_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +12,7 @@ enum PointsTab { redeem, history }
 class PointsController extends GetxController {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? _userSub;
 
   bool isLoading = true;
 
@@ -25,8 +28,8 @@ class PointsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchPointsBalance();
-     historyStream();
+    _listenToPointsBalance();
+    historyStream();
   }
 List<PointsHistoryModel> history = [];
 
@@ -47,27 +50,27 @@ Stream<List<PointsHistoryModel>> historyStream() {
 }
 
 
-  // 🔥 Fetch points from users/{uid}
-  Future<void> fetchPointsBalance() async {
-    try {
-      isLoading = true;
-      update();
+  // 🔥 Live points balance from users/{uid}
+  void _listenToPointsBalance() {
+    final user = _auth.currentUser;
+    if (user == null) return;
 
-      final user = _auth.currentUser;
-      if (user == null) return;
+    isLoading = true;
+    update();
 
-      final doc =
-          await _firestore.collection('users').doc(user.uid).get();
-
-      if (doc.exists) {
-        pointsBalance = (doc.data()?['pointsBalance'] ?? 0) as int;
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'Failed to load points');
-    } finally {
+    _userSub = _firestore
+        .collection('users')
+        .doc(user.uid)
+        .snapshots()
+        .listen((doc) {
+      pointsBalance = (doc.data()?['pointsBalance'] ?? 0) as int;
       isLoading = false;
       update();
-    }
+    }, onError: (_) {
+      isLoading = false;
+      Get.snackbar('Error', 'Failed to load points');
+      update();
+    });
   }
 
   Future<void> redeemPoints() async {
@@ -92,14 +95,30 @@ Stream<List<PointsHistoryModel>> historyStream() {
   }
 
   try {
-    await _firestore.collection('points_redemptions').add({
-      'userId': user.uid,
-      'points': points,
-      'cashValue': points / 100,
-      'iban': ibanController.text.trim(),
-      'swift': swiftController.text.trim(),
-      'status': 'pending',
-      'createdAt': FieldValue.serverTimestamp(),
+    final userRef = _firestore.collection('users').doc(user.uid);
+    final redemptionRef = _firestore.collection('points_redemptions').doc();
+
+    await _firestore.runTransaction((transaction) async {
+      final userSnap = await transaction.get(userRef);
+      final currentBalance =
+          (userSnap.data()?['pointsBalance'] ?? 0) as int;
+
+      if (points > currentBalance) {
+        throw Exception('INSUFFICIENT_POINTS');
+      }
+
+      transaction.update(userRef, {
+        'pointsBalance': FieldValue.increment(-points),
+      });
+      transaction.set(redemptionRef, {
+        'userId': user.uid,
+        'points': points,
+        'cashValue': points / 100,
+        'iban': ibanController.text.trim(),
+        'swift': swiftController.text.trim(),
+        'status': 'pending',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
     });
 
     Get.snackbar(
@@ -113,8 +132,13 @@ Stream<List<PointsHistoryModel>> historyStream() {
     ibanController.clear();
     swiftController.clear();
 
-  } catch (e) {
-    Get.snackbar('Error', 'Something went wrong');
+  } catch (e , s) {
+    if (e.toString().contains('INSUFFICIENT_POINTS')) {
+      Get.snackbar('Error', 'Not enough points');
+    } else {
+      log('$e /$s');
+      Get.snackbar('Error', 'Something went wrong');
+    }
   }
 }
 
@@ -125,6 +149,8 @@ Stream<List<PointsHistoryModel>> historyStream() {
     return pts / 100;
   }
 
+  double get balanceCashValue => pointsBalance / 100;
+
   void changeTab(PointsTab tab) {
     currentTab = tab;
     update();
@@ -132,6 +158,7 @@ Stream<List<PointsHistoryModel>> historyStream() {
 
   @override
   void onClose() {
+    _userSub?.cancel();
     pointsController.dispose();
     ibanController.dispose();
     swiftController.dispose();

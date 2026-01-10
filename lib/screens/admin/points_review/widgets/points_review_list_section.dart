@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
 import '../../../../constants/app_colors.dart';
-import '../submissions_review_controller.dart';
+import '../points_review_controller.dart';
 
-class SubmissionsListSection extends StatelessWidget {
-  const SubmissionsListSection({super.key});
+class PointsReviewListSection extends StatelessWidget {
+  const PointsReviewListSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SubmissionsReviewController>(
+    return GetBuilder<PointsReviewController>(
       builder: (controller) {
-        final items = controller.visibleSubmissions;
+        final items = controller.visibleRedemptions;
 
         if (items.isEmpty) {
           return Center(
             child: Text(
-              'No submissions found',
+              'No requests found',
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.grey,
@@ -31,7 +30,7 @@ class SubmissionsListSection extends StatelessWidget {
           itemCount: items.length,
           separatorBuilder: (_, __) => SizedBox(height: 10.h),
           itemBuilder: (context, index) {
-            return _SubmissionCard(item: items[index]);
+            return _RedemptionCard(item: items[index]);
           },
         );
       },
@@ -39,14 +38,14 @@ class SubmissionsListSection extends StatelessWidget {
   }
 }
 
-class _SubmissionCard extends StatelessWidget {
-  final AdminSubmissionItem item;
+class _RedemptionCard extends StatelessWidget {
+  final AdminRedemptionItem item;
 
-  const _SubmissionCard({required this.item});
+  const _RedemptionCard({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<SubmissionsReviewController>();
+    final c = Get.find<PointsReviewController>();
 
     return Container(
       padding: EdgeInsets.all(12.w),
@@ -58,7 +57,6 @@ class _SubmissionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Top info row
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,7 +67,7 @@ class _SubmissionCard extends StatelessWidget {
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                child: const Icon(Icons.image, color: Colors.white),
+                child: const Icon(Icons.payments, color: Colors.white),
               ),
               SizedBox(width: 10.w),
               Expanded(
@@ -82,7 +80,7 @@ class _SubmissionCard extends StatelessWidget {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      item.materialTitle,
+                      '${item.points} points',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
@@ -90,7 +88,7 @@ class _SubmissionCard extends StatelessWidget {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      '${item.location}\n${item.date}',
+                      '\$${item.cashValue.toStringAsFixed(2)} • ${item.date}',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 11,
@@ -102,26 +100,8 @@ class _SubmissionCard extends StatelessWidget {
               _StatusBadge(status: item.status),
             ],
           ),
-
           SizedBox(height: 10.h),
-
-          // Points
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              '${item.points} points',
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-
-          SizedBox(height: 10.h),
-
-          // Bottom section depends on status
-          if (item.status == SubmissionStatus.pending) ...[
+          if (item.status == RedemptionStatus.pending) ...[
             Row(
               children: [
                 Expanded(
@@ -143,9 +123,9 @@ class _SubmissionCard extends StatelessWidget {
                 ),
               ],
             ),
-          ] else if (item.status == SubmissionStatus.approved) ...[
+          ] else if (item.status == RedemptionStatus.approved) ...[
             Text(
-              'Approved and points awarded',
+              'Approved conversion',
               style: TextStyle(
                 color: AppColors.primary,
                 fontSize: 12.sp,
@@ -153,7 +133,7 @@ class _SubmissionCard extends StatelessWidget {
               ),
             ),
           ] else ...[
-            if (item.rejectReason != null)
+            if (item.note != null)
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 10.w,
@@ -167,7 +147,7 @@ class _SubmissionCard extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  item.rejectReason!,
+                  item.note!,
                   style: const TextStyle(
                     color: Colors.red,
                     fontSize: 12,
@@ -181,39 +161,8 @@ class _SubmissionCard extends StatelessWidget {
   }
 }
 
-void _showRejectDialog(SubmissionsReviewController controller, String id) {
-  final TextEditingController reasonController = TextEditingController();
-
-  Get.defaultDialog(
-    title: 'Reject Submission',
-    content: Column(
-      children: [
-        TextField(
-          controller: reasonController,
-          maxLines: 3,
-          decoration: const InputDecoration(
-            hintText: 'Enter reject reason',
-            border: OutlineInputBorder(),
-          ),
-        ),
-      ],
-    ),
-    textConfirm: 'Reject',
-    textCancel: 'Cancel',
-    onConfirm: () {
-      final reason = reasonController.text.trim();
-      if (reason.isEmpty) {
-        Get.snackbar('Error', 'Please enter a reason');
-        return;
-      }
-      controller.reject(id, reason: reason);
-      Get.back();
-    },
-  );
-}
-
 class _StatusBadge extends StatelessWidget {
-  final SubmissionStatus status;
+  final RedemptionStatus status;
 
   const _StatusBadge({required this.status});
 
@@ -221,20 +170,20 @@ class _StatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     late final String text;
     late final Color bg;
-    late final Color fg;// لون النص
+    late final Color fg;
 
     switch (status) {
-      case SubmissionStatus.pending:
+      case RedemptionStatus.pending:
         text = 'Pending';
         bg = const Color(0xFFFFF3CD);
         fg = const Color(0xFF856404);
         break;
-      case SubmissionStatus.approved:
+      case RedemptionStatus.approved:
         text = 'Approved';
         bg = const Color(0xFFD4EDDA);
         fg = const Color(0xFF155724);
         break;
-      case SubmissionStatus.rejected:
+      case RedemptionStatus.rejected:
         text = 'Rejected';
         bg = const Color(0xFFF8D7DA);
         fg = const Color(0xFF721C24);
@@ -294,4 +243,35 @@ class _ActionButton extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showRejectDialog(PointsReviewController controller, String id) {
+  final TextEditingController reasonController = TextEditingController();
+
+  Get.defaultDialog(
+    title: 'Reject Redemption',
+    content: Column(
+      children: [
+        TextField(
+          controller: reasonController,
+          maxLines: 3,
+          decoration: const InputDecoration(
+            hintText: 'Enter reject reason',
+            border: OutlineInputBorder(),
+          ),
+        ),
+      ],
+    ),
+    textConfirm: 'Reject',
+    textCancel: 'Cancel',
+    onConfirm: () {
+      final reason = reasonController.text.trim();
+      if (reason.isEmpty) {
+        Get.snackbar('Error', 'Please enter a reason');
+        return;
+      }
+      controller.reject(id, reason: reason);
+      Get.back();
+    },
+  );
 }

@@ -21,76 +21,80 @@ class RedeemPointsCard extends GetView<PointsController> {
           ),
           SizedBox(height: 12.h),
 
-          Container(
-            padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(
-              color: theme.cardColor,
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.4),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _FieldLabel('Enter Points', theme),
-                _InputField(
-                  controller: controller.pointsController,
-                  hint: '200',
-                  theme: theme,
-                ),
-
-                SizedBox(height: 12.h),
-
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '≈ \$${controller.cashValue.toStringAsFixed(2)}',
-                    style: theme.textTheme.bodySmall,
+          GetBuilder<PointsController>(
+            builder: (ctrl) {
+              return Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  color: theme.cardColor,
+                  borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(
+                    color: theme.colorScheme.primary.withOpacity(0.4),
                   ),
                 ),
-
-                SizedBox(height: 16.h),
-
-                _FieldLabel('IBAN', theme),
-                _InputField(
-                  controller: controller.ibanController,
-                  hint: 'PS92 PIBC ...',
-                  theme: theme,
-                ),
-
-                SizedBox(height: 12.h),
-
-                _FieldLabel('SWIFT', theme),
-                _InputField(
-                  controller: controller.swiftController,
-                  hint: 'PIBCPS22XXX',
-                  theme: theme,
-                ),
-
-                SizedBox(height: 18.h),
-
-                SizedBox(
-                  width: double.infinity,
-                  height: 44.h,
-                  child: ElevatedButton(
-                    onPressed: controller.redeemPoints,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: theme.colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _FieldLabel('Enter Points', theme),
+                    _InputField(
+                      controller: ctrl.pointsController,
+                      hint: '200',
+                      theme: theme,
+                    ),
+              
+                    SizedBox(height: 12.h),
+              
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                         '≈ \$${ctrl.balanceCashValue.toStringAsFixed(2)}',
+                        style: theme.textTheme.bodySmall,
                       ),
                     ),
-                    child: Text(
-                      'Convert',
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onPrimary,
+              
+                    SizedBox(height: 16.h),
+              
+                    _FieldLabel('IBAN', theme),
+                    _InputField(
+                      controller: ctrl.ibanController,
+                      hint: 'PS92 PIBC ...',
+                      theme: theme,
+                    ),
+              
+                    SizedBox(height: 12.h),
+              
+                    _FieldLabel('SWIFT', theme),
+                    _InputField(
+                      controller: ctrl.swiftController,
+                      hint: 'PIBCPS22XXX',
+                      theme: theme,
+                    ),
+              
+                    SizedBox(height: 18.h),
+              
+                    SizedBox(
+                      width: double.infinity,
+                      height: 44.h,
+                      child: ElevatedButton(
+                        onPressed: ctrl.redeemPoints,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: theme.colorScheme.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                        ),
+                        child: Text(
+                          'Convert',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: theme.colorScheme.onPrimary,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            }
           ),
         ],
       ),
@@ -121,11 +125,12 @@ class _InputField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        style: theme.textTheme.bodyMedium,
+        style: theme.textTheme.bodyMedium!.copyWith(color: Colors.red),
         decoration: InputDecoration(
           hintText: hint,
           border: InputBorder.none,
           isDense: true,
+          hintStyle: TextStyle(color: Colors.grey[500])
         ),
       ),
     );

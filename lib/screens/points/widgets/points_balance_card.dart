@@ -21,53 +21,57 @@ class PointsBalanceCard extends GetView<PointsController> {
                     fit: BoxFit.cover,
                     repeat: ImageRepeat.repeat, // مهم للـ texture
                     colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary.withOpacity(.2),
+                      theme.colorScheme.primary.withOpacity(.4),
                       BlendMode.srcATop,
                     ),
                   ),
                 ),
       padding: EdgeInsets.all(16.w),
-      child: Container(
-        padding: EdgeInsets.all(14.w),
-        decoration: BoxDecoration(
-          color: theme.cardColor,
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: GetBuilder<PointsController>(
+        builder: (ctrl) {
+          return Container(
+            padding: EdgeInsets.all(14.w),
+            decoration: BoxDecoration(
+              color: theme.cardColor,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
               children: [
-                /// Title
-                Text(
-                  'Available Points',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-
-                SizedBox(height: 6.h),
-
-                /// Points Value
-                Text(
-                  controller.pointsBalance.toString(),
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
-                  ),
-                ),
-
-                SizedBox(height: 8.h),
-
-                /// Cash Value
-                Text(
-                  '≈ \$${controller.cashValue.toStringAsFixed(2)} value',
-                  style: theme.textTheme.bodySmall,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// Title
+                    Text(
+                      'Available Points',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+          
+                    SizedBox(height: 6.h),
+          
+                    /// Points Value
+                    Text(
+                      ctrl.pointsBalance.toString(),
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primary,
+                      ),
+                    ),
+          
+                    SizedBox(height: 8.h),
+          
+                    /// Cash Value
+                    Text(
+                      '≈ \$${ctrl.balanceCashValue.toStringAsFixed(2)} value',
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          );
+        }
       ),
     );
   }

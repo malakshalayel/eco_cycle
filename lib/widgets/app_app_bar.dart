@@ -13,7 +13,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.withBorder = true,
     this.backgroundImage,
-    this.imageOpacity = 0.15, // شفافية texture
+    this.imageOpacity = 0.4, // شفافية texture
   });
 
   @override

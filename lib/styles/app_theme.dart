@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  /// 🌤 Light Theme (Eco – Soft & Natural)
+  /// 🌤 Light Theme (Eco – Modern & Professional)
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
 
-    scaffoldBackgroundColor: const Color(0xFFF6F7F3), // off-white طبيعي
+    scaffoldBackgroundColor: const Color(0xFFF3F6F2),
 
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFF5E7F6A), // Sage Green
+      primary: Color(0xFF1F6E5C),
       onPrimary: Colors.white,
       surface: Color(0xFFFFFFFF),
-      onSurface: Color(0xFF1E2B24),
-      secondary: Color(0xFF8FB9A8), // أخضر فاتح للأكسنت
+      onSurface: Color(0xFF1E2A24),
+      secondary: Color(0xFF8FBF9F),
     ),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF5E7F6A),
+      backgroundColor: Color(0xFF1F6E5C),
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
@@ -25,7 +25,7 @@ class AppTheme {
 
     cardColor: Colors.white,
 
-    dividerColor: Color(0xFFE1E5DF),
+    dividerColor: Color(0xFFE0E6DE),
 
     textTheme: const TextTheme(
       titleLarge: TextStyle(
@@ -34,13 +34,13 @@ class AppTheme {
         color: Colors.white, // AppBar
       ),
       bodyLarge: TextStyle(
-        color: Color(0xFF1E2B24),
+        color: Color(0xFF1E2A24),
       ),
       bodyMedium: TextStyle(
-        color: Color(0xFF4A5A52),
+        color: Color(0xFF3F4E48),
       ),
       bodySmall: TextStyle(
-        color: Color(0xFF7B8A82),
+        color: Color(0xFF6E7C75),
       ),
     ),
   );

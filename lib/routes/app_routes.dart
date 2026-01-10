@@ -18,4 +18,5 @@ class Routes {
   static const ADMIN_LOGIN = '/admin-login';
   static const ADMIN_HOME = '/admin-home';
   static const ADMIN_SUBMISSIONS_REVIEW = '/admin-submissions-review';
+  static const ADMIN_POINTS_REVIEW = '/admin-points-review';
 }

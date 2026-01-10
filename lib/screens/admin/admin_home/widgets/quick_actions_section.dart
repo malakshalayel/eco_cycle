@@ -35,6 +35,25 @@ class QuickActionsSection extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 10.h),
+        GestureDetector(
+          onTap: () => Get.toNamed(Routes.ADMIN_POINTS_REVIEW),
+          child: Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14.r),
+              border: Border.all(color: AppColors.primary),
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Points Redemptions'),
+                Icon(Icons.arrow_forward, color: AppColors.primary),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

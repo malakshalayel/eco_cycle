@@ -22,7 +22,7 @@ class HistorySummarySection extends GetView<HistoryController> {
                     fit: BoxFit.cover,
                     repeat: ImageRepeat.repeat, // مهم للـ texture
                     colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary.withOpacity(.2),
+                      theme.colorScheme.primary.withOpacity(.4),
                       BlendMode.srcATop,
                     ),
                   ),

@@ -3,6 +3,8 @@ import 'package:eco_cycle/screens/admin/admin_home/admin_home_bindings.dart';
 import 'package:eco_cycle/screens/admin/admin_home/admin_home_view.dart';
 import 'package:eco_cycle/screens/admin/login/admin_login_binding.dart';
 import 'package:eco_cycle/screens/admin/login/admin_login_view.dart';
+import 'package:eco_cycle/screens/admin/points_review/points_review_binding.dart';
+import 'package:eco_cycle/screens/admin/points_review/points_review_view.dart';
 import 'package:eco_cycle/screens/admin/submissions_review/submissions_review_binding.dart';
 import 'package:eco_cycle/screens/admin/submissions_review/submissions_review_view.dart';
 import 'package:eco_cycle/screens/history/history_binding.dart';
@@ -91,6 +93,11 @@ class AppPages {
       name: Routes.ADMIN_SUBMISSIONS_REVIEW,
       page: () => const SubmissionsReviewView(),
       binding: SubmissionsReviewBinding(),
+    ),
+    GetPage(
+      name: Routes.ADMIN_POINTS_REVIEW,
+      page: () => const PointsReviewView(),
+      binding: PointsReviewBinding(),
     ),
 
   ];

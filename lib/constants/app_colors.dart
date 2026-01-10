@@ -22,8 +22,8 @@
 //   static const darkBackground = Color(0xFF121212);
 // }
 class AppColors {
-  static const primary = Color(0xFF4CAF50); // Eco green
-  static const primaryDark = Color(0xFF1E7F4F);
+  static const primary = Color(0xFF1F6E5C);
+  static const primaryDark = Color(0xFF165344);
 
   static const darkBg = Color(0xFF121212);
   static const darkSurface = Color(0xFF1E1E1E);

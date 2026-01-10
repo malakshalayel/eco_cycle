@@ -27,8 +27,10 @@ class PointsHistoryList extends GetView<PointsController> {
         final history = snapshot.data!;
 
         /// ✅ List
-        return ListView.separated(
+     return ListView.separated(
           padding: EdgeInsets.all(16.w),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: history.length,
           separatorBuilder: (_, __) => SizedBox(height: 12.h),
           itemBuilder: (context, index) {

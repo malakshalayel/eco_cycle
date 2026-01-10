@@ -6,102 +6,106 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../admin_home_controller.dart';
 
-class AdminHomeTopSection extends GetView<AdminHomeController> {
+class AdminHomeTopSection extends StatelessWidget{
   const AdminHomeTopSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12.r),
-          bottomRight: Radius.circular(12.r),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GetBuilder<AdminHomeController>(
+      builder: (controller) {
+        return Container(
+          padding: EdgeInsets.all(16.w),
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12.r),
+              bottomRight: Radius.circular(12.r),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Admin Dashboard',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Admin Dashboard',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        'EcoCycle Management Portal',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 2),
-                  Text(
-                    'EcoCycle Management Portal',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
+                  GestureDetector(
+                    onTap: (){ Get.toNamed(Routes.ADMIN_LOGIN);},
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout, color: Colors.white, size: 18),
+                        SizedBox(width: 4),
+                        Text('LogOut', style: TextStyle(color: Colors.white)),
+                      ],
                     ),
                   ),
                 ],
               ),
-              GestureDetector(
-                onTap: (){ Get.toNamed(Routes.ADMIN_LOGIN);},
-                child: Row(
-                  children: const [
-                    Icon(Icons.logout, color: Colors.white, size: 18),
-                    SizedBox(width: 4),
-                    Text('LogOut', style: TextStyle(color: Colors.white)),
-                  ],
-                ),
+        
+              SizedBox(height: 16.h),
+        
+              Row(
+                children: [
+                  _StatCard(
+                    title: 'Total Submissions',
+                    value: controller.totalSubmissions.toString(),
+                    change: '+12% vs last month',
+                    changeColor: Colors.green,
+                  ),
+                  SizedBox(width: 12.w),
+                  _StatCard(
+                    title: 'Active Users',
+                    value: controller.activeUsers.toString(),
+                    change: '+8% vs last month',
+                    changeColor: Colors.green,
+                  ),
+                ],
+              ),
+        
+              SizedBox(height: 12.h),
+        
+              Row(
+                children: [
+                  _StatCard(
+                    title: 'Points Awarded',
+                    value: controller.pointsAwarded.toString(),
+                    change: '+15% vs last month',
+                    changeColor: Colors.green,
+                  ),
+                  SizedBox(width: 12.w),
+                  _StatCard(
+                    title: 'Pending Reviews',
+                    value: controller.pendingReviews.toString(),
+                    change: '-5% vs last month',
+                    changeColor: Colors.red,
+                  ),
+                ],
               ),
             ],
           ),
-
-          SizedBox(height: 16.h),
-
-          Row(
-            children: [
-              _StatCard(
-                title: 'Total Submissions',
-                value: controller.totalSubmissions.toString(),
-                change: '+12% vs last month',
-                changeColor: Colors.green,
-              ),
-              SizedBox(width: 12.w),
-              _StatCard(
-                title: 'Active Users',
-                value: controller.activeUsers.toString(),
-                change: '+8% vs last month',
-                changeColor: Colors.green,
-              ),
-            ],
-          ),
-
-          SizedBox(height: 12.h),
-
-          Row(
-            children: [
-              _StatCard(
-                title: 'Points Awarded',
-                value: controller.pointsAwarded.toString(),
-                change: '+15% vs last month',
-                changeColor: Colors.green,
-              ),
-              SizedBox(width: 12.w),
-              _StatCard(
-                title: 'Pending Reviews',
-                value: controller.pendingReviews.toString(),
-                change: '-5% vs last month',
-                changeColor: Colors.red,
-              ),
-            ],
-          ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
