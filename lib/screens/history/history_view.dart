@@ -1,8 +1,7 @@
 import 'package:eco_cycle/widgets/app_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../constants/app_colors.dart';
+
 import 'history_controller.dart';
 import 'widgets/history_summary_section.dart';
 import 'widgets/history_list.dart';
@@ -16,7 +15,7 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
 
-      appBar: AppAppBar(title: "Submission History" , withBorder: false,),
+      appBar: AppAppBar(title: "Submission History".tr , withBorder: false,),
 
       body: GetBuilder<HistoryController>(
         init: HistoryController(),

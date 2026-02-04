@@ -3,11 +3,10 @@ import 'package:eco_cycle/screens/history/widgets/history_status_badge.dart';
 import 'package:eco_cycle/widgets/app_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../constants/app_colors.dart';
 class SubmissionDetailsView extends StatelessWidget {
   final SubmissionModel submission;
 
-  const SubmissionDetailsView({
+   SubmissionDetailsView({
     super.key,
     required this.submission,
   });

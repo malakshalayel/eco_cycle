@@ -22,8 +22,8 @@ class HistoryList extends GetView<HistoryController> {
 
         // ❌ Error
         if (snapshot.hasError) {
-          return const Center(
-            child: Text('Something went wrong'),
+          return  Center(
+            child: Text('Something went wrong'.tr),
           );
         }
 

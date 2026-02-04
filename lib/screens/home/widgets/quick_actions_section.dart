@@ -1,11 +1,7 @@
 import 'package:eco_cycle/routes/app_routes.dart';
-import 'package:eco_cycle/screens/history/history_view.dart';
-import 'package:eco_cycle/screens/points/points_view.dart';
-import 'package:eco_cycle/screens/submission/submission_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../constants/app_colors.dart';
 
 class QuickActionsSection extends StatelessWidget {
   const QuickActionsSection({super.key});
@@ -20,7 +16,7 @@ class QuickActionsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Quick Actions',
+            'Quick Actions'.tr,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -28,21 +24,21 @@ class QuickActionsSection extends StatelessWidget {
           SizedBox(height: 8.h),
 
           _ActionItem(
-            title: 'Submit Recyclable',
+            title: 'Submit Recyclable'.tr,
             icon: Icons.upload_outlined,
             color: theme.colorScheme.primary,
             onTap: () => Get.toNamed(Routes.SUBMISSION),
           ),
 
           _ActionItem(
-            title: 'View History',
+            title: 'View History'.tr,
             icon: Icons.history,
             color: theme.colorScheme.secondary,
             onTap: () => Get.toNamed(Routes.SUBMISSION_HISTORY),
           ),
 
           _ActionItem(
-            title: 'Redeem Points',
+            title: 'Redeem Points'.tr,
             icon: Icons.card_giftcard,
             color: Colors.orange.shade600,
             onTap: () => Get.toNamed(Routes.POINTS),

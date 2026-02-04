@@ -2,10 +2,9 @@ import 'package:eco_cycle/screens/home/widgets/home_top_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../constants/app_colors.dart';
+
 import 'home_controller.dart';
-import 'widgets/home_header.dart';
-import 'widgets/total_points_card.dart';
+
 import 'widgets/quick_actions_section.dart';
 import 'widgets/recent_activity_card.dart';
 

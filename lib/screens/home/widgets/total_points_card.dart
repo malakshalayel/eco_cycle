@@ -1,7 +1,7 @@
 import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
 class TotalPointsCard extends StatelessWidget {
   final int totalPoints;
   final int weeklyPoints;
@@ -45,7 +45,7 @@ class TotalPointsCard extends StatelessWidget {
               children: [
                 /// Title
                 Text(
-                  'Total Points',
+                  'Total Points'.tr,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -66,7 +66,7 @@ class TotalPointsCard extends StatelessWidget {
 
                 /// Weekly Gain
                 Text(
-                  '+$weeklyPoints points this week',
+                  '+$weeklyPoints points this week'.tr,
                   style: theme.textTheme.bodySmall,
                 ),
               ],

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -14,9 +13,12 @@ class AdminHomeController extends GetxController {
   int pointsAwarded = 0;
   int pendingReviews = 0;
   bool isLoading = true;
+  bool _usersLoaded = false;
+  bool _submissionsLoaded = false;
 
   List<Map<String, dynamic>> topRecyclers = [];
   Map<String, int> _submissionCountByUser = {};
+  List<QueryDocumentSnapshot<Map<String, dynamic>>>? _usersDocs;
 
   @override
   void onInit() {
@@ -32,15 +34,21 @@ class AdminHomeController extends GetxController {
   }
 
   void _listenToDashboard() {
+    _usersLoaded = false;
+    _submissionsLoaded = false;
     isLoading = true;
     update();
 
     _usersSub = _firestore.collection('users').snapshots().listen((snapshot) {
+      _usersDocs = snapshot.docs;
       activeUsers = snapshot.size;
       pointsAwarded = _sumPoints(snapshot.docs);
       _rebuildTopRecyclers(snapshot.docs);
-      isLoading = false;
-      update();
+      _usersLoaded = true;
+      if (_submissionsLoaded) {
+        isLoading = false;
+        update();
+      }
     }, onError: (_) {
       Get.snackbar('Error', 'Failed to load users');
     });
@@ -51,9 +59,12 @@ class AdminHomeController extends GetxController {
       pendingReviews =
           snapshot.docs.where((d) => d.data()['status'] == 'pending').length;
       _submissionCountByUser = _countSubmissionsByUser(snapshot.docs);
-      _rebuildTopRecyclers();
-      isLoading = false;
-      update();
+      _rebuildTopRecyclers(_usersDocs);
+      _submissionsLoaded = true;
+      if (_usersLoaded) {
+        isLoading = false;
+        update();
+      }
     }, onError: (_) {
       Get.snackbar('Error', 'Failed to load submissions');
     });
@@ -63,10 +74,11 @@ class AdminHomeController extends GetxController {
     int total = 0;
     for (final doc in docs) {
       final value = doc.data()['pointsBalance'];
-      if (value is int) {
-        total += value.round();
+      if (value is num) {
+        total += value.toInt();
       }
-    }  return total;
+    }
+    return total;
   }
 
   void _rebuildTopRecyclers([

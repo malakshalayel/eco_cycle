@@ -26,7 +26,7 @@ class HistoryEmptyState extends StatelessWidget {
             SizedBox(height: 16.h),
 
             Text(
-              'No submissions yet',
+              'No submissions yet'.tr,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -35,7 +35,7 @@ class HistoryEmptyState extends StatelessWidget {
             SizedBox(height: 8.h),
 
             Text(
-              'Start recycling and submit your first item',
+              'Start recycling and submit your first item'.tr,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.bodySmall?.color,
@@ -53,7 +53,7 @@ class HistoryEmptyState extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
-              child: const Text('Submit Now'),
+              child:  Text('Submit Now'.tr),
             ),
           ],
         ),

@@ -29,7 +29,7 @@ class OnboardingView extends GetView<OnBoardingController> {
                     child: TextButton(
                       onPressed: c.skip,
                       child: Text(
-                        "Skip",
+                        "Skip".tr,
                         style: AppTextStyles.body(context),
                       ),
                     ),
@@ -42,21 +42,21 @@ class OnboardingView extends GetView<OnBoardingController> {
                 child: PageView(
                   controller: c.pageController,
                   onPageChanged: c.onPageChanged,
-                  children: const [
+                  children:  [
                     OnboardingItem(
                       image: onB1,
-                      title: "Welcome to EcoCycle App",
-                      subtitle: "Save environment and earn",
+                      title: "Welcome to EcoCycle App".tr,
+                      subtitle: "Save environment and earn".tr,
                     ),
                     OnboardingItem(
                       image: onB2,
-                      title: "Help protect the environment",
-                      subtitle: "Recycle your waste with us",
+                      title: "Help protect the environment".tr,
+                      subtitle: "Recycle your waste with us".tr,
                     ),
                     OnboardingItem(
                       image: onB3,
-                      title: "Collect points & convert to cash",
-                      subtitle: "Start now!",
+                      title: "Collect points & convert to cash".tr,
+                      subtitle: "Start now!".tr,
                     ),
                   ],
                 ),
@@ -100,7 +100,7 @@ class OnboardingView extends GetView<OnBoardingController> {
                       ),
                     ),
                     child: Text(
-                      c.currentIndex == 2 ? "Get Started" : "Next",
+                      c.currentIndex == 2 ? "Get Started".tr : "Next".tr,
                       style: AppTextStyles.button(context),
                     ),
                   ),

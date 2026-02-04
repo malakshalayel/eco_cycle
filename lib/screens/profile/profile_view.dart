@@ -4,15 +4,9 @@ import 'package:eco_cycle/widgets/app_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
-import '../../constants/app_colors.dart';
 import 'profile_controller.dart';
-import 'package:eco_cycle/services/theme_services.dart';
-import 'package:eco_cycle/widgets/app_app_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'profile_controller.dart';
+
+
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -24,8 +18,8 @@ class ProfileView extends GetView<ProfileController> {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: const AppAppBar(
-        title: "Profile",
+      appBar:  AppAppBar(
+        title: "Profile".tr,
         withBorder: false,
       ),
       body: Padding(
@@ -68,20 +62,20 @@ class ProfileView extends GetView<ProfileController> {
             _InfoCard(
               onTap: () => ThemeServices().switchTheme(),
               icon: Get.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              text: Get.isDarkMode ? 'Light Mode' : 'Dark Mode',
+              text: Get.isDarkMode ? 'Light Mode'.tr : 'Dark Mode'.tr,
             ),
 
             SizedBox(height: 20.h),
 _InfoCard(
   icon: Icons.language,
-  text: 'Language',
+  text: 'Language'.tr,
   onTap: () => _showLanguageSheet(context),
 ),
             SizedBox(height: 20.h),
 
             /// Logout
             _ActionCard(
-              title: 'Logout',
+              title: 'Logout'.tr,
               icon: Icons.logout,
               onTap: controller.logout,
             ),
@@ -90,7 +84,7 @@ _InfoCard(
 
             /// Delete Account
             _ActionCard(
-              title: 'Delete Account',
+              title: 'Delete Account'.tr,
               icon: Icons.delete,
               isDanger: true,
               onTap: controller.deleteAccount,

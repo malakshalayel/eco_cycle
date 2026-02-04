@@ -16,7 +16,7 @@ class PointsView extends GetView<PointsController> {
     return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
-      appBar: AppAppBar(title: "Points & Rewards", withBorder: false,),
+      appBar: AppAppBar(title: "Points & Rewards".tr, withBorder: false,),
       body: SingleChildScrollView(
         child: Column(
           children:  [

@@ -34,7 +34,7 @@ class MaterialTypeWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Material Type',
+                      'Material Type'.tr,
                       style: AppTextStyles.body(context),
                     ),
                     SizedBox(height: 8.h),
@@ -53,7 +53,7 @@ class MaterialTypeWidget extends StatelessWidget {
                           children: [
                             Text(
                               controller.materialType ??
-                                  'Select material type',
+                                  'Select material type'.tr,
                               style: controller.materialType == null
                                   ? AppTextStyles.small(context)
                                   : AppTextStyles.body(context),

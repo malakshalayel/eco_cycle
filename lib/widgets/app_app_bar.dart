@@ -8,7 +8,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? backgroundImage; // ✅ صورة اختيارية
   final double imageOpacity;
 
-  const AppAppBar({
+   AppAppBar({
     super.key,
     required this.title,
     this.withBorder = true,

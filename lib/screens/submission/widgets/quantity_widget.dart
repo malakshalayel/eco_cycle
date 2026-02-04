@@ -30,7 +30,7 @@ class QuantityWidget extends GetView<SubmissionController> {
           children: [
             /// Title
             Text(
-              'Quantity / Weight',
+              'Quantity / Weight'.tr,
               style: AppTextStyles.body(context),
             ),
 
@@ -49,7 +49,7 @@ class QuantityWidget extends GetView<SubmissionController> {
                 style: AppTextStyles.body(context),
                 onChanged: controller.setQuantity,
                 decoration: InputDecoration(
-                  hintText: 'Enter number of items or weight in kg',
+                  hintText: 'Enter number of items or weight in kg'.tr,
                   hintStyle: AppTextStyles.small(context),
                   border: InputBorder.none,
                 ),

@@ -29,7 +29,7 @@ class RecentActivityCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Recent Activity',
+                  'Recent Activity'.tr,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -37,7 +37,7 @@ class RecentActivityCard extends StatelessWidget {
                 SizedBox(height: 16.h),
                 if (items.isEmpty)
                   Text(
-                    'No recent activity yet',
+                    'No recent activity yet'.tr,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.hintColor,
                     ),
@@ -107,9 +107,9 @@ class _ActivityRow extends StatelessWidget {
 
 String _timeAgo(DateTime date) {
   final diff = DateTime.now().difference(date);
-  if (diff.inMinutes < 1) return 'just now';
-  if (diff.inMinutes < 60) return '${diff.inMinutes} min ago';
-  if (diff.inHours < 24) return '${diff.inHours} hours ago';
-  if (diff.inDays < 7) return '${diff.inDays} days ago';
+  if (diff.inMinutes < 1) return 'just now'.tr;
+  if (diff.inMinutes < 60) return '${diff.inMinutes} min ago'.tr;
+  if (diff.inHours < 24) return '${diff.inHours} hours ago'.tr;
+  if (diff.inDays < 7) return '${diff.inDays} days ago'.tr;
   return '${date.day}/${date.month}/${date.year}';
 }

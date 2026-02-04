@@ -30,7 +30,7 @@ class LocationWidget extends GetView<SubmissionController> {
           children: [
             /// Title
             Text(
-              'Collection Location',
+              'Collection Location'.tr,
               style: AppTextStyles.body(context),
             ),
 
@@ -55,7 +55,7 @@ class LocationWidget extends GetView<SubmissionController> {
                     size: 18,
                     color: colors.primary,
                   ),
-                  hintText: 'Enter your location',
+                  hintText: 'Enter your location'.tr,
                   hintStyle: AppTextStyles.small(context),
                   border: InputBorder.none,
                 ),
@@ -78,7 +78,7 @@ class LocationWidget extends GetView<SubmissionController> {
                   ),
                 ),
                 child: Text(
-                  'Use Current Location',
+                  'Use Current Location'.tr,
                   style: TextStyle(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w600,

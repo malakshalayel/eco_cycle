@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eco_cycle/routes/app_routes.dart';
-import 'package:eco_cycle/screens/admin/admin_home/admin_home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'submissions_review_controller.dart';
 import 'widgets/submissions_top_section.dart';

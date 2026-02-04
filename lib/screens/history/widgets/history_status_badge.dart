@@ -2,7 +2,7 @@ import 'package:eco_cycle/screens/history/model/submission_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
-import '../history_controller.dart';
+
 class HistoryStatusBadge extends StatelessWidget {
   final SubmissionStatus status;
 

@@ -35,7 +35,7 @@ class SubmitButtonWidget extends StatelessWidget {
                       ),
                     )
                   : Text(
-                      'Submit for Review',
+                      'Submit for Review'.tr,
                       style: TextStyle(
                         color: controller.canSubmit
                             ? Colors.white

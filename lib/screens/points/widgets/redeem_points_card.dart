@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../points_controller.dart';
-import '../../../constants/app_colors.dart';
 class RedeemPointsCard extends GetView<PointsController> {
   const RedeemPointsCard({super.key});
 
@@ -16,7 +15,7 @@ class RedeemPointsCard extends GetView<PointsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Redeem Points',
+            'Redeem Points'.tr,
             style: theme.textTheme.titleMedium,
           ),
           SizedBox(height: 12.h),
@@ -35,7 +34,7 @@ class RedeemPointsCard extends GetView<PointsController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _FieldLabel('Enter Points', theme),
+                    _FieldLabel('Enter Points'.tr, theme),
                     _InputField(
                       controller: ctrl.pointsController,
                       hint: '200',
@@ -84,7 +83,7 @@ class RedeemPointsCard extends GetView<PointsController> {
                           ),
                         ),
                         child: Text(
-                          'Convert',
+                          'Convert'.tr,
                           style: theme.textTheme.labelLarge?.copyWith(
                             color: theme.colorScheme.onPrimary,
                           ),

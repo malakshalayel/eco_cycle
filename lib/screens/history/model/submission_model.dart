@@ -27,7 +27,7 @@ class SubmissionModel {
     this.note,
   });
 
-  /// 🔄 Firestore → Model
+  ///  Firestore → Model
   factory SubmissionModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
   ) {

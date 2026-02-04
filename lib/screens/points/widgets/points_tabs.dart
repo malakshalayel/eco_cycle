@@ -14,12 +14,12 @@ class PointsTabs extends GetView<PointsController> {
         return Row(
           children: [
             _TabItem(
-              title: 'Redeem',
+              title: 'Redeem'.tr,
               isActive: controller.currentTab == PointsTab.redeem,
               onTap: () => controller.changeTab(PointsTab.redeem),
             ),
             _TabItem(
-              title: 'History',
+              title: 'History'.tr,
               isActive: controller.currentTab == PointsTab.history,
               onTap: () => controller.changeTab(PointsTab.history),
             ),

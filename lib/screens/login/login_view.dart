@@ -27,7 +27,7 @@ class LoginView extends GetView<LoginController> {
 
           /// Title
           Text(
-            "Start the journey to a better earth",
+            "Start the journey to a better earth".tr,
             style: AppTextStyles.body(context),
             textAlign: TextAlign.center,
           ),
@@ -40,11 +40,11 @@ class LoginView extends GetView<LoginController> {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: "Reduce. Reuse. Recycle",
+                  text: "Reduce. Reuse. Recycle".tr,
                   style: AppTextStyles.small(context),
                 ),
                 TextSpan(
-                  text: " Repeat.",
+                  text: " Repeat.".tr,
                   style: AppTextStyles.body(context).copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -57,7 +57,7 @@ class LoginView extends GetView<LoginController> {
 
           /// CTA
           Text(
-            "Join EcoCycle today!",
+            "Join EcoCycle today!".tr,
             style: AppTextStyles.h2(context),
           ),
 
@@ -98,7 +98,7 @@ class LoginView extends GetView<LoginController> {
                             ),
                             SizedBox(width: 10.w),
                             Text(
-                              "Sign In With Google",
+                              "Sign In With Google".tr,
                               style: AppTextStyles.button(context),
                             ),
                           ],
@@ -115,7 +115,7 @@ class LoginView extends GetView<LoginController> {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: "login as admin? ",
+                  text: "login as admin? ".tr,
                   style: AppTextStyles.small(context),
                 ),
                 TextSpan(
@@ -124,7 +124,7 @@ class LoginView extends GetView<LoginController> {
                   )..onTap = () {
                     Get.toNamed(Routes.ADMIN_LOGIN);
                   },
-                  text: "Admin",
+                  text: "Admin".tr,
                   style: AppTextStyles.small(context).copyWith(
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,

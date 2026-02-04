@@ -1,10 +1,8 @@
-import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:eco_cycle/screens/home/home_controller.dart';
 import 'package:eco_cycle/screens/home/widgets/home_header.dart';
 import 'package:eco_cycle/screens/home/widgets/total_points_card.dart';
 import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class HomeTopSection extends StatelessWidget {

@@ -43,12 +43,12 @@ class HistorySummarySection extends GetView<HistoryController> {
 return Row(
             children: [
               _SummaryCard(
-                title: 'Total Submissions',
+                title: 'Total Submissions'.tr,
                 value:totalSubmissions.toString(),
               ),
               SizedBox(width: 20.w),
               _SummaryCard(
-                title: 'Points Earned',
+                title: 'Points Earned'.tr,
                 value: totalPoints.toString(),
               ),
             ],

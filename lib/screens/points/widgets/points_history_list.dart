@@ -14,7 +14,7 @@ class PointsHistoryList extends GetView<PointsController> {
       stream: controller.historyStream(),
       builder: (context, snapshot) {
 
-        /// 🔄 Loading (first frame)
+        ///  Loading (first frame)
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const PointsHistorySkeleton();
         }
@@ -164,7 +164,7 @@ class _EmptyHistoryState extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           Text(
-            'No conversions yet',
+            'No conversions yet'.tr,
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.w500,
@@ -172,7 +172,7 @@ class _EmptyHistoryState extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           Text(
-            'Your conversion history will appear here',
+            'Your conversion history will appear here'.tr,
             style: TextStyle(
               fontSize: 11.sp,
               color: Colors.grey,

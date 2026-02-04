@@ -1,10 +1,10 @@
-import 'package:eco_cycle/constants/app_colors.dart';
 import 'package:eco_cycle/routes/app_routes.dart';
 import 'package:eco_cycle/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../home_controller.dart';
+
 class HomeHeaderWidget extends GetView<HomeController> {
   const HomeHeaderWidget({super.key});
 
@@ -22,19 +22,18 @@ class HomeHeaderWidget extends GetView<HomeController> {
           onTap: () => Get.toNamed(Routes.PROFILE),
           child: Container(
             padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 40.h),
-              decoration: BoxDecoration(
-                           // color: theme.colorScheme.primary,
-
-                  image: DecorationImage(
-                    image: AssetImage(ecoBackground),
-                    fit: BoxFit.cover,
-                    repeat: ImageRepeat.repeat, // مهم للـ texture
-                    colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary.withOpacity(.4),
-                      BlendMode.srcATop,
-                    ),
-                  ),
+            decoration: BoxDecoration(
+              // color: theme.colorScheme.primary,
+              image: DecorationImage(
+                image: AssetImage(ecoBackground),
+                fit: BoxFit.cover,
+                repeat: ImageRepeat.repeat, // مهم للـ texture
+                colorFilter: ColorFilter.mode(
+                  theme.colorScheme.primary.withOpacity(.4),
+                  BlendMode.srcATop,
                 ),
+              ),
+            ),
             child: Row(
               children: [
                 CircleAvatar(
@@ -52,7 +51,7 @@ class HomeHeaderWidget extends GetView<HomeController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hello, ${controller.userName}',
+                      'greeting'.trParams({'name': controller.userName}),
                       style: TextStyle(
                         color: theme.colorScheme.onPrimary,
                         fontSize: 16.sp,
@@ -60,7 +59,7 @@ class HomeHeaderWidget extends GetView<HomeController> {
                       ),
                     ),
                     Text(
-                      'Eco Warrior level 3',
+                      'Eco Warrior level 3'.tr,
                       style: TextStyle(
                         color: theme.colorScheme.onPrimary.withOpacity(0.7),
                         fontSize: 12.sp,
@@ -97,7 +96,6 @@ class _HeaderSkeleton extends StatelessWidget {
         bottom: 16.h,
       ),
 
-      // ✅ خليه من الثيم مش لون ثابت
       color: theme.colorScheme.primary,
 
       child: Row(
@@ -106,10 +104,7 @@ class _HeaderSkeleton extends StatelessWidget {
           Container(
             width: 56.r,
             height: 56.r,
-            decoration: BoxDecoration(
-              color: baseColor,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: baseColor, shape: BoxShape.circle),
           ),
 
           SizedBox(width: 12.w),
@@ -118,17 +113,9 @@ class _HeaderSkeleton extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _SkeletonLine(
-                width: 140.w,
-                height: 14.h,
-                color: baseColor,
-              ),
+              _SkeletonLine(width: 140.w, height: 14.h, color: baseColor),
               SizedBox(height: 8.h),
-              _SkeletonLine(
-                width: 100.w,
-                height: 10.h,
-                color: baseColor,
-              ),
+              _SkeletonLine(width: 100.w, height: 10.h, color: baseColor),
             ],
           ),
         ],
@@ -137,8 +124,7 @@ class _HeaderSkeleton extends StatelessWidget {
   }
 }
 
-
-/// 🔹 Reusable line
+///  Reusable line
 class _SkeletonLine extends StatelessWidget {
   final double width;
   final double height;

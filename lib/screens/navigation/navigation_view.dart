@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../constants/app_colors.dart';
 import 'navigation_controller.dart';
 
 // Pages

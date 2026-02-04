@@ -42,7 +42,7 @@ class PointsBalanceCard extends GetView<PointsController> {
                   children: [
                     /// Title
                     Text(
-                      'Available Points',
+                      'Available Points'.tr,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
