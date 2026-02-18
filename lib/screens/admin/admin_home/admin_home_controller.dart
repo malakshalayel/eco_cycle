@@ -50,7 +50,7 @@ class AdminHomeController extends GetxController {
         update();
       }
     }, onError: (_) {
-      Get.snackbar('Error', 'Failed to load users');
+      //Get.snackbar('Error', 'Failed to load users');
     });
 
     _submissionsSub =
@@ -66,7 +66,7 @@ class AdminHomeController extends GetxController {
         update();
       }
     }, onError: (_) {
-      Get.snackbar('Error', 'Failed to load submissions');
+     // Get.snackbar('Error', 'Failed to load submissions');
     });
   }
 

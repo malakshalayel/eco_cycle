@@ -68,7 +68,7 @@ Stream<List<PointsHistoryModel>> historyStream() {
       update();
     }, onError: (_) {
       isLoading = false;
-      Get.snackbar('Error', 'Failed to load points');
+    //  Get.snackbar('Error', 'Failed to load points');
       update();
     });
   }

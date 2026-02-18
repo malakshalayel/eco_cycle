@@ -132,7 +132,7 @@ class PointsReviewController extends GetxController {
       update();
     }, onError: (_) {
       isLoading = false;
-      Get.snackbar('Error', 'Failed to load redemptions');
+     // Get.snackbar('Error', 'Failed to load redemptions');
       update();
     });
   }
@@ -218,7 +218,7 @@ class PointsReviewController extends GetxController {
         'note': null,
       });
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update redemption');
+    //  Get.snackbar('Error', 'Failed to update redemption');
     }
   }
 

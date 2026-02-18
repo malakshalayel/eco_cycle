@@ -128,6 +128,7 @@ Future<void> login() async {
     }
     
   } catch (e) {
+    Get.snackbar('Error', 'The supplied auth credential is incorrect');
     log('❌ Error: $e');
   }
 }

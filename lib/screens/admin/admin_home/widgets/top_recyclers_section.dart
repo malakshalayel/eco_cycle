@@ -32,55 +32,68 @@ class TopRecyclersSection extends StatelessWidget {
                 ),
               ),
               child: Column(
-                children: controller.topRecyclers.map(
-                  (e) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: 6.h),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundColor: _rankColor(e['rank']),
+                children: controller.topRecyclers.isEmpty
+                    ? [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           child: Text(
-                            e['rank'].toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                            'No approved submissions this month',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ]
+                    : controller.topRecyclers
+                        .map(
+                          (e) => Padding(
+                            padding: EdgeInsets.symmetric(vertical: 6.h),
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 14,
+                                  backgroundColor: _rankColor(e['rank']),
+                                  child: Text(
+                                    e['rank'].toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 12.w),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        e['name'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${e['submissions']} submissions',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  '${e['points']} pts',
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(width: 12.w),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                e['name'],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                '${e['submissions']} submissions',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          '${e['points']} pts',
-                          style: const TextStyle(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ).toList(),
+                        )
+                        .toList(),
               ),
             ),
           ],

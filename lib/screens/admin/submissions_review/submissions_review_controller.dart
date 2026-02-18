@@ -153,7 +153,7 @@ class SubmissionsReviewController extends GetxController {
       update();
     }, onError: (_) {
       isLoading = false;
-      Get.snackbar('Error', 'Failed to load submissions');
+     // Get.snackbar('Error', 'Failed to load submissions');
       update();
     });
   }
@@ -236,7 +236,7 @@ class SubmissionsReviewController extends GetxController {
         'status': status,
       });
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update submission');
+    //  Get.snackbar('Error', 'Failed to update submission');
     }
   }
   Future<void> _approveWithPoints(String id) async {
@@ -269,7 +269,7 @@ class SubmissionsReviewController extends GetxController {
     } catch (e, s) {
       log('Approve failed: $e');
       log('Approve stack: $s');
-      Get.snackbar('Error', 'Failed to approve submission');
+     // Get.snackbar('Error', 'Failed to approve submission');
     }
   }
 
@@ -280,7 +280,7 @@ class SubmissionsReviewController extends GetxController {
         'note': reason.trim(),
       });
     } catch (e) {
-      Get.snackbar('Error', 'Failed to reject submission');
+     // Get.snackbar('Error', 'Failed to reject submission');
     }
   }
 

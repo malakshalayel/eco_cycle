@@ -72,7 +72,7 @@ class HomeController extends GetxController {
       },
       onError: (_) {
         isLoading = false;
-        Get.snackbar('Error', 'Failed to load home data');
+        //Get.snackbar('Error', 'Failed to load home data');
         update();
       },
     );
@@ -87,7 +87,7 @@ class HomeController extends GetxController {
       _mergeActivities();
       update();
     }, onError: (_) {
-      Get.snackbar('Error', 'Failed to load submissions');
+      //Get.snackbar('Error', 'Failed to load submissions');
     });
 
     _redemptionsSub = _fireStore
@@ -100,7 +100,7 @@ class HomeController extends GetxController {
       _mergeActivities();
       update();
     }, onError: (_) {
-      Get.snackbar('Error', 'Failed to load redemptions');
+     // Get.snackbar('Error', 'Failed to load redemptions');
     });
   }
 

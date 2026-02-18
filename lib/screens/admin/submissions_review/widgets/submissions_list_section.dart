@@ -13,7 +13,9 @@ class SubmissionsListSection extends StatelessWidget {
     return GetBuilder<SubmissionsReviewController>(
       builder: (controller) {
         final items = controller.visibleSubmissions;
-
+if(controller.isLoading){ 
+  return Center( child: CircularProgressIndicator(),);
+}
         if (items.isEmpty) {
           return Center(
             child: Text(
@@ -63,13 +65,21 @@ class _SubmissionCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 44.w,
-                height: 44.w,
+                width: 100.w,
+                height: 100.w,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                child: const Icon(Icons.image, color: Colors.white),
+                clipBehavior: Clip.antiAlias,
+                child: item.imageUrl.isNotEmpty
+                    ? Image.network(
+                        item.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) =>
+                            const Icon(Icons.image, color: Colors.white),
+                      )
+                    : const Icon(Icons.image, color: Colors.white),
               ),
               SizedBox(width: 10.w),
               Expanded(
